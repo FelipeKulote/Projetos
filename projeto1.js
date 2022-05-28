@@ -3,7 +3,8 @@ console.clear();
 
 //                    ## DESAFIO DO HERÓI ##
 // Criar uma história com 5 desafios a serem concluídos, cada desafio deverá ser respondido com "sim" ou "não"
-// Exibir respostar sobre o desenvolvimento de acordo com os desafios concluídos pelo nosso herói
+// Exibir respostar sobre o desenvolvimento de acordo com os desafios concluídos pelo nosso herói 
+
 
 console.log(`Você está se preparando para se aventurar pelo mundo, conquistar seu maior sonho que é viajar pelo país dirigindo seu próprio veículo, 
 mas para isso é necessário que você conquiste primeiro sua carteira de motorista. Todos sabemos dos desafios para essa conquista, mas você está preparado?
