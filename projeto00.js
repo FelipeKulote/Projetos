@@ -1,7 +1,7 @@
 const prompt = require("prompt-sync")();
 console.clear()
 
-// PROJETO DETETIVE
+//              ###    PROJETO DETETIVE    ###
 
 console.log(`Conferindo o caderno de anotações saberei se João é culpado ou não...`)
 
@@ -15,7 +15,7 @@ let p3 = prompt('Alguma testemunha viu João na cena do crime? ')
 if (p3.toLowerCase() == 'sim') {x++}
 let p4 = prompt('Outras pessoas já relataram que João tinha desavenças com a vítima? ')
 if (p4.toLowerCase() == 'sim') {x++}
-let p5 = prompt('')
+let p5 = prompt('João se beneficiaria com a morte da vítima? ')
 if (p5.toLowerCase() == 'sim') {x++}
 
 if (x >= 4) {

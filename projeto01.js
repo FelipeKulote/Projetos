@@ -1,9 +1,9 @@
 const prompt = require("prompt-sync")();
 console.clear()
 
-// Desafio do herói
-// Criar uma história com 5 desafios a serem cumpridos, cada desafio será respondido com sim ou não
-// de acordo com a resposta teremos as definições das respostas que deve ser mostrada ao "Herói"
+//                    ###    DESAFIO DO HERÓI    ###
+// Criar uma história com 5 desafios a serem concluídos, cada desafio deverá ser respondido com "sim" ou "não"
+// Exibir respostas sobre o desenvolvimento de acordo com os desafios concluídos pelo nosso herói 
 
 console.log(`Você está se preparando para se aventurar pelo mundo, conquistar seu maior sonho que é viajar pelo país dirigindo seu próprio veículo, 
 mas para isso é necessário que você conquiste primeiro sua carteira de motorista. Todos sabemos dos desafios para essa conquista, mas você está preparado?
