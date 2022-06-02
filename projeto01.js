@@ -65,3 +65,17 @@ else if (x == 4) {
 else {
     console.log('QUE MARAVILHA, VOCÊ CONSEGUIU!! AGORA FINALMENTE PODERÁ REALIZAR SEU SONHO E CONHECER MUITOS LUGARES NOVOS!!');
 }
+
+
+
+let perguntas = [
+    '1- Você procurou uma escola com bons índices de aprovação? ',
+    '2- Você está estudando para passar na prova teórica? ',
+    '3- Você acertou mais de 25 questões da prova teórica? ',
+    '4- Você entendeu tudo sobre as aulas práticas de direção de veículos? ',
+    '5- Você passou no exame de direção? '
+];
+
+let respostas = [];
+
+for (let i; i < 5)
