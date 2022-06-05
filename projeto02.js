@@ -7,19 +7,21 @@ const jokenpo = ['pedra', 'papel', 'tesoura'];
 let pontosJ = 0
 let pontosM = 0
 
+/* aqui o jogador vai decidir em qual estrutura de repetição irá fazer o jogo,
+caso responda 1 cairá como 'for' então ele definirá quantas rodadas serão jogadas;
+caso responda 2 cairá como 'while' então ele poderá fazer quantas rodadas quiser 
+e sair quando for perguntado se deseja continuar ou não.
+*/
 console.log(`Escolha uma opção: 
 1- Ecolher a quantidade de rodadas que vou jogar.,
 2- Jogar sem quantidade definida de rodadas.`);
 let opcao = +prompt(); 
-/* aqui o jogador vai decidir em qual estrutura de repetição irá fazer o jogo,
-caso responda 1 cairá como 'for' então ele definirá quantas rodadas serão jogadas;
-caso responda 2 cairá como 'while' então ele poderá fazer quantas rodadas quiser e sair quando for perguntado se deseja continuar ou não.
-*/
+// while para que o jogador não digite algo diferente do que eu quero como resposta
 while (opcao != 1 && opcao != 2){
     console.log('Por favor escolha uma das opções.');
     console.log(`Escolha uma opção: 
 1- Ecolher a quantidade de rodadas que vou jogar.,
-2- Jogar sem quantidade definida de rodadas.`); // while para que o jogador não digite algo diferente do que eu quero como resposta
+2- Jogar sem quantidade definida de rodadas.`); 
 let opcao = +prompt();
 }
 if (opcao === 1){
