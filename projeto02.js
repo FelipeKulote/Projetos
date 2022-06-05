@@ -22,7 +22,7 @@ while (opcao != 1 && opcao != 2){
     console.log(`Escolha uma opção: 
 1- Ecolher a quantidade de rodadas que vou jogar.,
 2- Jogar sem quantidade definida de rodadas.`); 
-let opcao = +prompt();
+    opcao = +prompt();
 }
 if (opcao === 1){
     let rodadas = +prompt('Quantas rodadas serão jogadas? ');
