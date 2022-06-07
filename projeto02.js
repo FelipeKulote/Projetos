@@ -1,7 +1,19 @@
 const prompt = require("prompt-sync")();
 console.clear();
 
-//                  ### Projeto JOKENPÔ ###
+/*                  ### Projeto JOKENPÔ ###
+
+Para esse projeto, os requisitos fundamentais serão:
+1- Permitir que eu decida quantas rodadas iremos fazer;
+2- Ler a minha escolha (Pedra, papel ou tesoura, ou os elementos escolhidos por você para o seu jogo);
+3- Decidir de forma aleatória a decisão do computador;
+4- Comparar os valores e declarar o vencedor (marcando 1 vitória para ele);
+5- Repetir os passos 2, 3 e 4 de acordo com o número de rodadas escolhido;
+6- Ao final das repetições, mostrar quantas rodadas cada jogador ganhou;
+7- Determinar quem foi o grande campeão de acordo com a quantidade de vitórias de cada um (computador e jogador);
+8- Perguntar se o Jogador quer jogar novamente: Se sim volte ao primeiro passo, se não finalize o programa.
+*/
+
 
 const jokenpo = ['pedra', 'papel', 'tesoura'];
 let pontosJ = 0
