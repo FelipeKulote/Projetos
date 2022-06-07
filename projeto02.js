@@ -93,7 +93,7 @@ if (opcao === 1){
     if(pontosJ > pontosM){
         console.log('PARABÉNS, VOCÊ FOI O VENCEDOR DESSE EMOCIONANTE DUELO!!');
     } else if (pontosM > pontosJ){
-        console.log('VISH.. NÃO DEU PRA VOCÊ DESTA VEZ!! (CÁ ENTRE NÓS, EU ACHO QUE ESSA IA ROUBA)');
+        console.log('VISH.. NÃO DEU PRA VOCÊ DESTA VEZ!! (CÁ ENTRE NÓS, EU ACHO QUE ESSA I.A. ROUBA)');
     } else {
         console.log('UÉ.. EMPATOU?! REALMENTE, VOCÊS TERMINARAM COM A MESMA QUANTIDADE DE PONTOS.');
     }
@@ -168,7 +168,7 @@ if (opcao === 1){
             if(pontosJ > pontosM){
                 console.log('PARABÉNS, VOCÊ FOI O VENCEDOR DESSE EMOCIONANTE DUELO!!');
             } else if (pontosM > pontosJ){
-                console.log('VISH.. NÃO DEU PRA VOCÊ DESTA VEZ!! (CÁ ENTRE NÓS, EU ACHO QUE ESSA IA ROUBA)');
+                console.log('VISH.. NÃO DEU PRA VOCÊ DESTA VEZ!! (CÁ ENTRE NÓS, EU ACHO QUE ESSA I.A. ROUBA)');
             } else {
                 console.log('UÉ.. EMPATOU?! REALMENTE, VOCÊS TERMINARAM COM A MESMA QUANTIDADE DE PONTOS.');
             }
