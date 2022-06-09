@@ -70,13 +70,13 @@ console.clear();
 console.log('Vamos à ', rodada + 1,'ª rodada');
 console.log();
 console.log('Jogador 1');
-let j11lin = +prompt('Escolha a linha: ');
-while(j11lin != 0 && j11lin != 1 && j11lin != 2){
+let esclin1 = +prompt('Escolha a linha: ');
+while(esclin1 != 0 && esclin1 != 1 && esclin1 != 2){
     console.log('Essa opção não faz parte de nenhuma coordenada')
-    j11lin = +prompt('Escolha a linha: ');
+    esclin1 = +prompt('Escolha a linha: ');
 }
-let j11col = +prompt('Escolha a coluna: ');
-matriz[j11lin][j11col] = 'X';
+let esccol1 = +prompt('Escolha a coluna: ');
+matriz[esclin1][esccol1] = 'X';
 console.log();
 // for (let i of matriz){
 //     console.log(i);
@@ -84,16 +84,16 @@ console.log();
 console.table(matriz);
 console.log();
 console.log('Jogador 2');
-let j21lin = +prompt('Escolha a linha: ');
-let j21col = +prompt('Escolha a coluna: ');
-while (matriz[j21lin][j21col] == matriz[j11lin][j11col]){
+let esclin2 = +prompt('Escolha a linha: ');
+let esccol2 = +prompt('Escolha a coluna: ');
+while (matriz[esclin2][esccol2] == matriz[esclin1][esccol1]){
     console.log();
     console.log('Este lugar já foi escolhido, escolha outro: ');
-    j21lin = +prompt('Escolha a linha: ');
-    j21col = +prompt('Escolha a coluna: ');
+    esclin2 = +prompt('Escolha a linha: ');
+    esccol2 = +prompt('Escolha a coluna: ');
 }
 console.clear();
-matriz[j21lin][j21col] = 'O';
+matriz[esclin2][esccol2] = 'O';
 console.log();
 // for (let i of matriz){
 //     console.log(i);
@@ -101,17 +101,17 @@ console.log();
 console.table(matriz);
 console.log();
 console.log('Jogador 1');
-let j12lin = +prompt('Escolha a linha: ');
-let j12col = +prompt('Escolha a coluna: ');
-while (matriz[j12lin][j12col] == matriz[j11lin][j11col] && 
-    matriz[j12lin][j12col] == matriz[j21lin][j21col]){
+let esclin3 = +prompt('Escolha a linha: ');
+let esccol3 = +prompt('Escolha a coluna: ');
+while (matriz[esclin3][esccol3] == matriz[esclin1][esccol1] && 
+    matriz[esclin3][esccol3] == matriz[esclin2][esccol2]){
     console.log();
     console.log('Este lugar já foi escolhido, escolha outro: ');
-    j12lin = +prompt('Escolha a linha: ');
-    j12col = +prompt('Escolha a coluna: ');
+    esclin2 = +prompt('Escolha a linha: ');
+    esccol2 = +prompt('Escolha a coluna: ');
 }
 console.clear();
-matriz[j12lin][j12col] = 'X';
+matriz[esclin3][esccol3] = 'X';
 console.log();
 // for (let i of matriz){
 //     console.log(i);
