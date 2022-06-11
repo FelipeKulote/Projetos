@@ -26,7 +26,7 @@ let jogador2 = prompt('Jogador 2: ');
 let pontosJ1 = 0;
 let pontosJ2 = 0;
 let rodada = 0;
-let placar = 'Palcar'[pontosJ1, pontosJ2]
+
 
 function verificarVitoria(a){
     // LINHAS
@@ -52,13 +52,7 @@ function verificarVitoria(a){
 }
 let venceu = verificarVitoria(matriz);
 
-while(true){
-    matriz = [ 
-        [' ',' ',' '],
-        [' ',' ',' '],
-        [' ',' ',' ']
-        ]
-    console.log(`Agora irei explicar como funcionará nosso jogo, por gentileza, preste bastante atenção:
+console.log(`Agora irei explicar como funcionará nosso jogo, por gentileza, preste bastante atenção:
     Os palpites serão dados através de coordenadas, conforme o exemplo abaixo
             coluna 0    conluna 1   coluna2
     linha 0    [0][0]       [0][1]      [0][1]
@@ -66,6 +60,12 @@ while(true){
     linha 2    [2][0]       [2][1]      [2][2]`);
     console.log('Vamos começar o nosso jogo.');
     prompt('Tecle enter quando estiverem preparados.');
+while(true){
+    matriz = [ 
+        [' ',' ',' '],
+        [' ',' ',' '],
+        [' ',' ',' ']
+        ]
     // console.log('Quem irá começar? ');
     // let start = prompt();
     // while(start != jogador1.toLowerCase() && start != jogador2.toLowerCase()){
@@ -75,15 +75,12 @@ while(true){
     // if (start == jogador1.toLowerCase()){ 
     let start = rodada % 2
     console.log(rodada)
+    console.log('Vamos à ', rodada + 1,'ª rodada');
     if(start == 0){
-        console.clear();
-        console.log('Vamos à ', rodada + 1,'ª rodada');
+        // console.clear();
         console.log();
         console.log(jogador1);
         let esclin1 = +prompt('Escolha a linha: ');
-        if(escolha == 'erro'){
-            esclin1 = +prompt('Escolha a linha: ');
-        }
         while(esclin1 != 0 && esclin1 != 1 && esclin1 != 2){
             console.log('Essa opção não faz parte de nenhuma coordenada')
             esclin1 = +prompt('Escolha a linha: ');
