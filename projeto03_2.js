@@ -82,7 +82,7 @@ console.log(`Agora irei explicar como funcionará nosso jogo, por gentileza, pre
     linha 1    [1][0]       [1][1]      [1][2]
     linha 2    [2][0]       [2][1]      [2][2]`);
     console.log('Vamos começar o nosso jogo.');
-    prompt('Tecle enter quando estiverem preparados.');
+    prompt('Tecle [ENTER] quando estiverem preparados.');
 JogoCompleto : while(true){
     matriz = [ 
         [' ',' ',' '],
@@ -93,6 +93,7 @@ JogoCompleto : while(true){
     console.log('Vamos à ', rodada + 1,'ª rodada');
     if(rodada % 2 == 0){
         while (true){
+            console.table(matriz)
             console.log();
             console.log(jogador1);
             let esclin = +prompt('Escolha a linha: ');
@@ -196,6 +197,7 @@ JogoCompleto : while(true){
         }
     } else { // Para que o jogo fique balanceado e cada rodada seja um começada por um jogador diferente
         while (true){
+            console.table(matriz)
             console.log();
             console.log(jogador2);
             let esclin = +prompt('Escolha a linha: ');
