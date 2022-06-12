@@ -35,7 +35,7 @@ function verificarVitoria(jogo){
         return true;
     } else if (jogo[2][0] == 'X' && jogo[2][1] == 'X' && jogo[2][2] == 'X') {
         return true;
-    } else if (jogo[0][0] == 'X' && jogo[1][0] == 'X' && jogo[1][0] == 'X') {
+    } else if (jogo[0][0] == 'X' && jogo[1][0] == 'X' && jogo[2][0] == 'X') {
         return true;
     } else if (jogo[0][1] == 'X' && jogo[1][1] == 'X' && jogo[2][1] == 'X') {
         return true;
@@ -43,7 +43,7 @@ function verificarVitoria(jogo){
         return true;
     } else if (jogo[0][0] == 'X' && jogo[1][1] == 'X' && jogo[2][2] == 'X') {
         return true;
-    } else if (jogo[1][0] == 'X' && jogo[1][1] == 'X' && jogo[1][2] == 'X') {
+    } else if (jogo[2][0] == 'X' && jogo[1][1] == 'X' && jogo[0][2] == 'X') {
         return true;
     } else if (jogo[0][0] == 'O' && jogo[0][1] == 'O' && jogo[0][2] == 'O') {
         return true;
@@ -51,7 +51,7 @@ function verificarVitoria(jogo){
         return true;
     } else if (jogo[2][0] == 'O' && jogo[2][1] == 'O' && jogo[2][2] == 'O') {
         return true;
-    } else if (jogo[0][0] == 'O' && jogo[1][0] == 'O' && jogo[1][0] == 'O') {
+    } else if (jogo[0][0] == 'O' && jogo[1][0] == 'O' && jogo[2][0] == 'O') {
         return true;
     } else if (jogo[0][1] == 'O' && jogo[1][1] == 'O' && jogo[2][1] == 'O') {
         return true;
@@ -59,7 +59,7 @@ function verificarVitoria(jogo){
         return true;
     } else if (jogo[0][0] == 'O' && jogo[1][1] == 'O' && jogo[2][2] == 'O') {
         return true;
-    } else if (jogo[1][0] == 'O' && jogo[1][1] == 'O' && jogo[1][2] == 'O') {
+    } else if (jogo[2][0] == 'O' && jogo[1][1] == 'O' && jogo[0][2] == 'O') {
         return true;
     } else {
         return false;
@@ -144,8 +144,8 @@ JogoCompleto : while(true){
             matriz[esclin3][esccol3] == 'O'){
             console.log();
             console.log('Este lugar já foi escolhido, escolha outro: ');
-            esclin2 = +prompt('Escolha a linha: ');
-            esccol2 = +prompt('Escolha a coluna: ');
+            esclin3 = +prompt('Escolha a linha: ');
+            esccol3 = +prompt('Escolha a coluna: ');
         }
         console.clear();
         matriz[esclin3][esccol3] = 'X';
@@ -168,8 +168,8 @@ JogoCompleto : while(true){
             matriz[esclin4][esccol4] == 'O'){
             console.log();
             console.log('Este lugar já foi escolhido, escolha outro: ');
-            esclin2 = +prompt('Escolha a linha: ');
-            esccol2 = +prompt('Escolha a coluna: ');
+            esclin4 = +prompt('Escolha a linha: ');
+            esccol4 = +prompt('Escolha a coluna: ');
         }
         console.clear();
         matriz[esclin4][esccol4] = 'O';
@@ -192,8 +192,8 @@ JogoCompleto : while(true){
             matriz[esclin5][esccol5] == 'O'){
             console.log();
             console.log('Este lugar já foi escolhido, escolha outro: ');
-            esclin2 = +prompt('Escolha a linha: ');
-            esccol2 = +prompt('Escolha a coluna: ');
+            esclin5 = +prompt('Escolha a linha: ');
+            esccol5 = +prompt('Escolha a coluna: ');
         }
         console.clear();
         matriz[esclin5][esccol5] = 'X';
@@ -234,8 +234,8 @@ JogoCompleto : while(true){
             matriz[esclin6][esccol6] == 'O'){
             console.log();
             console.log('Este lugar já foi escolhido, escolha outro: ');
-            esclin2 = +prompt('Escolha a linha: ');
-            esccol2 = +prompt('Escolha a coluna: ');
+            esclin6 = +prompt('Escolha a linha: ');
+            esccol6 = +prompt('Escolha a coluna: ');
         }
         console.clear();
         matriz[esclin6][esccol6] = 'O';
@@ -276,8 +276,8 @@ JogoCompleto : while(true){
             matriz[esclin7][esccol7] == 'O'){
             console.log();
             console.log('Este lugar já foi escolhido, escolha outro: ');
-            esclin2 = +prompt('Escolha a linha: ');
-            esccol2 = +prompt('Escolha a coluna: ');
+            esclin7 = +prompt('Escolha a linha: ');
+            esccol7 = +prompt('Escolha a coluna: ');
         }
         console.clear();
         matriz[esclin7][esccol7] = 'X';
@@ -318,8 +318,8 @@ JogoCompleto : while(true){
             matriz[esclin8][esccol8] == 'O'){
             console.log();
             console.log('Este lugar já foi escolhido, escolha outro: ');
-            esclin2 = +prompt('Escolha a linha: ');
-            esccol2 = +prompt('Escolha a coluna: ');
+            esclin8 = +prompt('Escolha a linha: ');
+            esccol8 = +prompt('Escolha a coluna: ');
         }
         console.clear();
         matriz[esclin8][esccol8] = 'O';
@@ -356,8 +356,8 @@ JogoCompleto : while(true){
             matriz[esclin9][esccol9] == 'O'){
             console.log();
             console.log('Este lugar já foi escolhido, escolha outro: ');
-            esclin2 = +prompt('Escolha a linha: ');
-            esccol2 = +prompt('Escolha a coluna: ');
+            esclin9 = +prompt('Escolha a linha: ');
+            esccol9 = +prompt('Escolha a coluna: ');
         }
         console.clear();
         matriz[esclin9][esccol9] = 'X';
@@ -447,8 +447,8 @@ JogoCompleto : while(true){
             matriz[esclin3][esccol3] == 'O'){
             console.log();
             console.log('Este lugar já foi escolhido, escolha outro: ');
-            esclin2 = +prompt('Escolha a linha: ');
-            esccol2 = +prompt('Escolha a coluna: ');
+            esclin3 = +prompt('Escolha a linha: ');
+            esccol3 = +prompt('Escolha a coluna: ');
         }
         console.clear();
         matriz[esclin3][esccol3] = 'O';
@@ -471,8 +471,8 @@ JogoCompleto : while(true){
             matriz[esclin4][esccol4] == 'O'){
             console.log();
             console.log('Este lugar já foi escolhido, escolha outro: ');
-            esclin2 = +prompt('Escolha a linha: ');
-            esccol2 = +prompt('Escolha a coluna: ');
+            esclin4 = +prompt('Escolha a linha: ');
+            esccol4 = +prompt('Escolha a coluna: ');
         }
         console.clear();
         matriz[esclin4][esccol4] = 'X';
@@ -495,8 +495,8 @@ JogoCompleto : while(true){
             matriz[esclin5][esccol5] == 'O'){
             console.log();
             console.log('Este lugar já foi escolhido, escolha outro: ');
-            esclin2 = +prompt('Escolha a linha: ');
-            esccol2 = +prompt('Escolha a coluna: ');
+            esclin5 = +prompt('Escolha a linha: ');
+            esccol5 = +prompt('Escolha a coluna: ');
         }
         console.clear();
         matriz[esclin5][esccol5] = 'O';
@@ -537,8 +537,8 @@ JogoCompleto : while(true){
             matriz[esclin6][esccol6] == 'O'){
             console.log();
             console.log('Este lugar já foi escolhido, escolha outro: ');
-            esclin2 = +prompt('Escolha a linha: ');
-            esccol2 = +prompt('Escolha a coluna: ');
+            esclin6 = +prompt('Escolha a linha: ');
+            esccol6 = +prompt('Escolha a coluna: ');
         }
         console.clear();
         matriz[esclin6][esccol6] = 'X';
@@ -579,8 +579,8 @@ JogoCompleto : while(true){
             matriz[esclin7][esccol7] == 'O'){
             console.log();
             console.log('Este lugar já foi escolhido, escolha outro: ');
-            esclin2 = +prompt('Escolha a linha: ');
-            esccol2 = +prompt('Escolha a coluna: ');
+            esclin7 = +prompt('Escolha a linha: ');
+            esccol7 = +prompt('Escolha a coluna: ');
         }
         console.clear();
         matriz[esclin7][esccol7] = 'O';
@@ -621,8 +621,8 @@ JogoCompleto : while(true){
             matriz[esclin8][esccol8] == 'O'){
             console.log();
             console.log('Este lugar já foi escolhido, escolha outro: ');
-            esclin2 = +prompt('Escolha a linha: ');
-            esccol2 = +prompt('Escolha a coluna: ');
+            esclin8 = +prompt('Escolha a linha: ');
+            esccol8 = +prompt('Escolha a coluna: ');
         }
         console.clear();
         matriz[esclin8][esccol8] = 'X';
@@ -659,8 +659,8 @@ JogoCompleto : while(true){
             matriz[esclin9][esccol9] == 'O'){
             console.log();
             console.log('Este lugar já foi escolhido, escolha outro: ');
-            esclin2 = +prompt('Escolha a linha: ');
-            esccol2 = +prompt('Escolha a coluna: ');
+            esclin9 = +prompt('Escolha a linha: ');
+            esccol9 = +prompt('Escolha a coluna: ');
         }
         console.clear();
         matriz[esclin9][esccol9] = 'O';
