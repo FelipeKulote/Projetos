@@ -77,7 +77,7 @@ let venceu = verificarVitoria(matriz);
 
 console.log(`Agora irei explicar como funcionará nosso jogo, por gentileza, preste bastante atenção:
     Os palpites serão dados através de coordenadas, conforme o exemplo abaixo
-            coluna 0    conluna 1   coluna2
+              coluna 0     conluna 1   coluna 2
     linha 0    [0][0]       [0][1]      [0][1]
     linha 1    [1][0]       [1][1]      [1][2]
     linha 2    [2][0]       [2][1]      [2][2]`);
@@ -126,7 +126,7 @@ JogoCompleto : while(true){
                 console.log('[2] Não');
                 continuar = +prompt();
                 while (continuar != 1 && continuar != 2){
-                    continuar = +prompt('Por favor digite 1 para Sim ou 2 para Não:');
+                    continuar = +prompt('Por favor digite 1 para Sim ou 2 para Não: ');
                 }
                 if (continuar == 1){
                     rodada++
@@ -141,7 +141,7 @@ JogoCompleto : while(true){
                 console.log('[2] Não');
                 continuar = +prompt();
                 while (continuar != 1 && continuar != 2){
-                    continuar = +prompt('Por favor digite 1 para Sim ou 2 para Não:');
+                    continuar = +prompt('Por favor digite 1 para Sim ou 2 para Não: ');
                 }
                 if (continuar == 1){
                     rodada++
@@ -184,7 +184,7 @@ JogoCompleto : while(true){
                 console.log('[2] Não');
                 continuar = +prompt();
                 while (continuar != 1 && continuar != 2){
-                    continuar = +prompt('Por favor digite 1 para Sim ou 2 para Não:');
+                    continuar = +prompt('Por favor digite 1 para Sim ou 2 para Não: ');
                 }
                 if (continuar == 1){
                     rodada++
@@ -229,7 +229,7 @@ JogoCompleto : while(true){
                 console.log('[2] Não');
                 continuar = +prompt();
                 while (continuar != 1 && continuar != 2){
-                    continuar = +prompt('Por favor digite 1 para Sim ou 2 para Não:');
+                    continuar = +prompt('Por favor digite 1 para Sim ou 2 para Não: ');
                 }
                 if (continuar == 1){
                     rodada++
@@ -244,7 +244,7 @@ JogoCompleto : while(true){
                 console.log('[2] Não');
                 continuar = +prompt();
                 while (continuar != 1 && continuar != 2){
-                    continuar = +prompt('Por favor digite 1 para Sim ou 2 para Não:');
+                    continuar = +prompt('Por favor digite 1 para Sim ou 2 para Não: ');
                 }
                 if (continuar == 1){
                     rodada++
@@ -287,7 +287,7 @@ JogoCompleto : while(true){
                 console.log('[2] Não');
                 continuar = +prompt();
                 while (continuar != 1 && continuar != 2){
-                    continuar = +prompt('Por favor digite 1 para Sim ou 2 para Não:');
+                    continuar = +prompt('Por favor digite 1 para Sim ou 2 para Não: ');
                 }
                 if (continuar == 1){
                     rodada++
