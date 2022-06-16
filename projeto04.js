@@ -24,18 +24,117 @@ ainda incrementar com o tempo restante.
 /* ######## BRAINSTORM PARA A HISTÓRIA
 
 Criar um objeto para o personagem com os atributos: 
-nome
-fome
-saúde
-dinheiro
-estresse
-ganância
-suspeita
-moral
+*/
+let personagem = {
+    nome: 'Felipe',
+    saudeFome: 50,
+    saldo: 20,
+    aluguel: 2,
+    estresse: 30,
+    ganancia: 0,
+    suspeita: 0,
+    moral: 0,
+    xp: 0,
 
-(aluguel)
+    mudarSaldo: function(dinheiro){
+        this.saldo += dinheiro;
+        console.log(`Você tem: ${this.saldo} R$`)
+    },
+    aumentarSuspeita: function(susp){
+        this.suspeita += susp;
+        console.log(`Suspeita: ${this.suspeita}`);
+    },
 
+    aumentarGanancia: function(ganan){
+        this.ganancia += ganan;
+        console.log(`Ganância: ${this.ganancia}`)
+    },
 
+    aumentarMoral: function(moral){
+        this.moral += moral;
+        console.log(`Moral: ${this.moral}`)
+    },
+    aumentarXp: function(xp){
+        this.xp += xp
+        console.log(`Experiência: ${this.xp}`)
+    }
+}
+
+let tempo = {
+    dia: 0,
+    hora: 07,
+    minuto: 00,
+
+    passarTempo: function(dia, hora, minuto){
+        this.dia += dia;
+        this.hora += hora;
+        this.minuto += minuto;
+        if (this.hora >= 24){
+            this.dia++;
+            this.hora -= 24;
+        }
+        if (this.minuto >= 60){
+            this.hora++;
+            this.minuto -= 60;
+        }
+    }
+}
+
+let lugaresAssalto = [
+    '[1] Um idoso na rua', 
+    '[2] Um mercadinho de bairro', 
+    '[3] Uma loja de jóias', 
+    '[4] Um banco com pouco movimento', 
+    '[5] O banco principal da cidade'
+]
+let ferramentas = [
+    '[1] Nenhuma arma',
+    '[2] Taco de basebol',
+    '[3] Faca',
+    '[4] Pistola',
+    '[5] Fuzil AK47'
+]
+function primeiroassalto(){
+    let resultado;
+    console.log(`Javier: Agora você irá realizar seu primeiro assalto, deve controlar seu nervosismo
+    e pensar muito sobre o plano. Como você não tem tanta experiência, aconselho começar com uma coisa
+    simples, mas isso é você quem irá decidir, fique a vontade caso queira algo mais complexo, é você que
+    está correndo os riscos. Então vamos começar os preparativos.`);
+    prompt();
+    console.log(`Primeiramente precisamos escolher o local que você irá começar, escolha uma
+    das opções: `);
+    for (let i of lugaresAssalto){
+        console.log(i);
+    }
+    console.log('Escolha uma das opções utilizando números de 1 a 5')
+    let escolhaLug = +prompt();
+    while (escolhaLug < 1 || escolhaLug > 5){
+        console.log('escolha uma das opções acima: ');
+        escolhaLug = +prompt();
+    }
+    console.log(`Muito bem, agora vamos escolher sua ferramenta/arma. eu tenho um bom estoque 
+    de armas e ferramentas, mas você só terá acesso a algumas: `)
+    for (let i of ferramentas){
+        console.log(i);
+    }
+    let escolhaArma = +prompt('Escolha uma das opções utilizando números de 1 a 4');
+    while (escolhaArma < 1 || escolhaArma > 4){
+        console.log('escolha uma das opções acima: ');
+        escolhaArma = +prompt();
+    }
+    console.log(`Muito bem, estamos prontos para começar, você escolheu assaltar 
+    ${lugaresAssalto[escolhaLug]}, com a arma ${ferramentas[escolhaArma]}.`)
+    passarTempo(0, 2, 0)
+    if (escolhaLug == 1){
+        let chance = Math.ceil(Math.random()*100);
+        if (chance > 10){
+            console.log()
+        }
+
+    }
+}
+primeiroassalto();
+/*
 Uma pessoa que recebe um salário que mal dá para sobreviver e que provavelmente vai precisar
 cometer alguns furtos/roubos para que consiga sobreviver e ter uma vida melhor.
 
@@ -69,7 +168,7 @@ if (conversar){
         afinal seu chefe estava de olho e poderia o reprimir a qualquer momento por não estar 
         trabalhando. (Não tocou no assunto dos papeis na mesa, já que o homem parecia não estar
         afim de falar sobre aquilo)
-        
+        personagem.aumentarmoral(10)
 
     } else (DEIXAR O SUJEITO EM PAZ) {
         Que rapaz estranho, mal encarado, melhor deixá-lo em paz.
@@ -91,6 +190,14 @@ tempo.
 if (COMIDA){
     fome++
 } else (ALUGUEL)
+    aluguel++
 
+Um mercadinho com câmera 
+Um mercadinho com segurança
+um Banco com seguranças armados (se XP menor que um valor (ele é preso ou morre))
 
 */
+
+
+
+
