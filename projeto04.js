@@ -23,12 +23,73 @@ ainda incrementar com o tempo restante.
 
 /* ######## BRAINSTORM PARA A HISTÓRIA
 
-Criar um objeto para o personagem com os atributos: 
+Uma pessoa que recebe um salário que mal dá para sobreviver e que provavelmente vai precisar
+cometer alguns furtos/roubos para que consiga sobreviver e ter uma vida melhor.
+
+Sua história começa em um dia qualquer, em que você vai trabalhar no seu emprego comum, 
+no qual é claramente explorado por seu chefe, que nem sempre paga seu salário no dia correto
+e que faz com que você faça todo tipo de serviço que aquele lugar precisa. Você sabe que todo 
+seu esforço não é recompensado, mas vive o medo de sair do emprego e não conseguir outro que 
+possa pagar seu aluguel e comida, então acaba se sujeitando a essa situação.
+
+Você é uma pessoa simples que quase sempre segue a mesma rotina todos os dias, acorda se levanta
+bem cedo e vai para o serviço, sem mais tanta paciência para aturar o babaca do seu chefe, que 
+age como se fosse o rei do mundo.
+
+Mas em um dia normal, um visitante que nunca fora visto naquele estabelecimento aparece, e 
+de alguma ele atrai sua atenção, ele estava a mexer com alguns papéis, parecendo estar estudando
+sobre algo. Você não consegue identificar um motivo específico pelo qual aquele sujeito te deixou 
+curioso em conhecê-lo. Um sujeito muito discreto e diferente daquelas pessoas comuns desta cidade, 
+usava uma roupa escura, sem tantos detalhes, parecia que não queria chamar tanta atenção.
+
+(escolha entre ir conversar com ele ou não)
+
+if (conversar){
+    Olá, me desculpe interromper sua refeição, mas o senhor é novo por aqui? Nunca o vi por aqui.
+    - O sujeito olha com uma cara estranha, como se dissesse que não queria ser incomodado -
+
+    (insistir e tentar forçar uma amizade ou deixar o sujeito em paz)
+    if (insistir){
+        - O homem respira fundo e lhe cumprimenta e respondi que sim, mas não diz muito de si, 
+        afinal não queria atrair olhares -
+        E então os dois começam a convensar sobre coisas aleatórias, mas não por tanto tempo,
+        afinal seu chefe estava de olho e poderia o reprimir a qualquer momento por não estar 
+        trabalhando. (Não tocou no assunto dos papeis na mesa, já que o homem parecia não estar
+        afim de falar sobre aquilo)
+        personagem.aumentarmoral(10)
+
+    } else (DEIXAR O SUJEITO EM PAZ) {
+        Que rapaz estranho, mal encarado, melhor deixá-lo em paz.
+        - Mas você continua curioso com aqueles papeis que ele estava olhando com tanta atenção -
+    }
+} 
+else (NÃO CONVERSAR){
+    Melhor não mexer com esse cara, não parece estar muito a fim de papo.
+}
+
+Você volta a fazer seu serviço afinal de contas, não quer que seu chefe te perturbe o resto do dia
+gritando com você.
+
+No fim do dia você recebe a diária do serviço e vai pra casa, insatisfeito com aquilo, pois o 
+dinheiro mal daria para comprar a comida do dia e lembrou que o aluguel estava atrasado há algum
+tempo.
+
+(Comprar comida ou guardar para o aluguel)
+if (COMIDA){
+    fome++
+} else (ALUGUEL)
+    aluguel++
+
+Um mercadinho com câmera 
+Um mercadinho com segurança
+um Banco com seguranças armados (se XP menor que um valor (ele é preso ou morre))
+
 */
+
 let personagem = {
     nome: 'Felipe',
     saudeFome: 50,
-    saldo: 20,
+    saldo: 0,
     aluguel: 2,
     estresse: 30,
     moral: 0,
@@ -36,7 +97,7 @@ let personagem = {
 
     mudarSaldo: function(dinheiro){
         this.saldo += dinheiro;
-        console.log(`Você tem: ${this.saldo} R$`)
+        console.log('Você ganha: ', dinheiro,' R$')
     },
     aumentarMoral: function(moral){
         this.moral += moral;
@@ -49,8 +110,8 @@ let personagem = {
 }
 
 let tempo = {
-    dia: 0,
-    hora: 07,
+    dia: 1,
+    hora: 08,
     minuto: 00,
 
     passarTempo: function(dia, hora, minuto){
@@ -65,38 +126,43 @@ let tempo = {
             this.hora++;
             this.minuto -= 60;
         }
-        console.log(`Já se passaram: ${this.dia} dia(s) ${this.hora} hora(s) e ${this.minuto} desdeo início de tudo isso.`)
+        console.log(`===============================================
+                Dia ${this.dia}º às ${this.hora}:${this.minuto}
+===============================================`)
     }   
 }
 
-let resultado = 'livre'
+let resultado = 'livre';
+let continuar = 0;
 
-let lugaresAssalto = [
+const lugaresAssalto = [
     '[1] Uma idosa na rua', 
     '[2] Um mercadinho de bairro', 
     '[3] Uma loja de jóias', 
     '[4] Um banco com pouco movimento', 
     '[5] O banco principal da cidade'
 ];
-let ferramentas = [
+const ferramentas = [
     '[1] Nenhuma arma',
     '[2] Taco de basebol',
     '[3] Faca',
     '[4] Pistola',
     '[5] Fuzil AK47'
 ];
+
 function primeiroAssalto(){
     let resultado = 'Livre'
+    console.log('1º ASSALTO');
     console.log(`Javier: Agora você irá realizar seu primeiro assalto, deve controlar seu nervosismo
 e pensar muito sobre o plano. Como você não tem tanta experiência, aconselho começar com uma coisa
 simples, mas isso é você quem irá decidir, fique a vontade caso queira algo mais complexo, é você que
 está correndo os riscos. Então vamos começar os preparativos.`);
     console.log();
     console.log(`Você tem ${personagem.xp} de experiência`);
-    prompt();
+    console.log();
+    prompt('Tecle [ENTER] para continuar.');
     console.clear();
-    console.log(`Primeiramente precisamos escolher o local que você irá começar, escolha uma
-das opções: `);
+    console.log(`Primeiramente precisamos escolher o local que você irá começar, escolha uma das opções: `);
     for (let i of lugaresAssalto){
         console.log(i);
     }
@@ -112,7 +178,7 @@ de armas e ferramentas, mas você só terá acesso a algumas: `);
     for (let i of ferramentas){
         console.log(i);
     }
-    console.log('Escolha uma das opções utilizando números de 1 a 4:')
+    console.log('Escolha uma das opções utilizando números de 1 a 5:')
     let escolhaArma = +prompt();
     while (escolhaArma < 1 || escolhaArma > 5){
         console.log('escolha uma das opções acima: ');
@@ -122,12 +188,11 @@ de armas e ferramentas, mas você só terá acesso a algumas: `);
     console.log(`Muito bem, estamos prontos para começar, você escolheu assaltar ${lugaresAssalto[escolhaLug - 1]}, 
 com a arma ${ferramentas[escolhaArma - 1]}.`);
     console.log();
-    tempo.passarTempo(0, 2, 30);
-    console.log();
     console.log(`Para não me envolver com alguma suspeita nos encontraremos amanhã, no nosso esconderijo! 
-                BOA SORTE!!`);
-    console.log();
+                                    BOA SORTE!!`);
+    tempo.passarTempo(0, 3, 30);
     console.log(`Ok. Tudo pronto, bora pro assalto.`);
+    console.log();
     prompt('Tecle [ENTER] para ver o resultado da seu assalto');
     console.clear();
     if (escolhaLug == 1){
@@ -254,11 +319,14 @@ por isso é importante começar com assaltos menores.`);
 
 function segundoAssalto(){
     let resultado = 'Livre'
+    console.log('2º ASSALTO');
     console.log(`Agora você já teve uma breve experiência de como é um assalto, vamos ao segundo assalto.
 Se você obteve sucesso no roubo anterior você terá um pouco mais de facilidade para realizar os próximos.`);
     console.log();
     console.log(`Você tem ${personagem.xp} de experiência`);
-    prompt();
+    console.log();
+    prompt('Tecle [ENTER] para continuar.');
+    console.clear();
     console.log(`Agora precisamos escolher o local que você irá assaltar, escolha uma das opções: `);
     for (let i of lugaresAssalto){
         console.log(i);
@@ -269,26 +337,29 @@ Se você obteve sucesso no roubo anterior você terá um pouco mais de facilidad
         console.log('escolha uma das opções acima: ');
         escolhaLug = +prompt();
     }
+    console.clear();
     console.log(`Muito bem, agora vamos escolher sua ferramenta/arma. Eu tenho um bom estoque 
 de armas e ferramentas, mas você só terá acesso a algumas: `);
     for (let i of ferramentas){
         console.log(i);
     }
-    console.log('Escolha uma das opções utilizando números de 1 a 4:');
+    console.log('Escolha uma das opções utilizando números de 1 a 5:');
     let escolhaArma = +prompt();
     while (escolhaArma < 1 || escolhaArma > 5){
         console.log('escolha uma das opções acima: ');
         escolhaArma = +prompt();
     }
+    console.clear();
     console.log(`Muito bem, estamos prontos para começar, você escolheu assaltar ${lugaresAssalto[escolhaLug - 1]}, 
 com a arma ${ferramentas[escolhaArma - 1]}.`);
     console.log();
-    tempo.passarTempo(0, 2, 30);
+    tempo.passarTempo(0, 3, 30);
     console.log();
     console.log(`Novamente, para não me envolver com alguma suspeita nos encontraremos amanhã, no nosso esconderijo! 
                 BOA SORTE!!`);
     console.log();
     console.log(`Ok. Tudo pronto, bora pro assalto.`);
+    console.log();
     prompt('Tecle [ENTER] para ver o resultado da seu assalto');
     console.clear();
     if (escolhaLug == 1){
@@ -408,11 +479,14 @@ por isso é importante ganhar mais experiência com assaltos menores.`);
 
 function terceiroAssalto(){
     let resultado = 'Livre'
+    console.log('3º ASSALTO');
     console.log(`As coisas estão ficando boas, você já está avançando com os assaltos e já tem mais experiência pra
 executar assaltos maiores.`);
     console.log();
     console.log(`Você tem ${personagem.xp} de experiência`);
-    prompt();
+    console.log();
+    prompt('Tecle [ENTER] para continuar.');
+    console.clear();
     console.log(`Agora você já está mais acostumado com o planejamento. 
 Precisamos escolher o local que você irá assaltar, escolha uma das opções: `);
     for (let i of lugaresAssalto){
@@ -424,25 +498,28 @@ Precisamos escolher o local que você irá assaltar, escolha uma das opções: `
         console.log('escolha uma das opções acima: ');
         escolhaLug = +prompt();
     }
+    console.clear();
     console.log(`Muito bem, agora vamos escolher sua ferramenta/arma. Como você já sabe, essas são suas armas disponíveis: `);
     for (let i of ferramentas){
         console.log(i);
     }
-    console.log('Escolha uma das opções utilizando números de 1 a 4:');
+    console.log('Escolha uma das opções utilizando números de 1 a 5:');
     let escolhaArma = +prompt();
     while (escolhaArma < 1 || escolhaArma > 5){
         console.log('escolha uma das opções acima: ');
         escolhaArma = +prompt();
     }
+    console.clear();
     console.log(`Muito bem, estamos prontos para começar, você escolheu assaltar ${lugaresAssalto[escolhaLug - 1]}, 
 com a arma ${ferramentas[escolhaArma - 1]}.`);
     console.log();
-    tempo.passarTempo(0, 2, 30);
+    tempo.passarTempo(0, 3, 30);
     console.log();
     console.log(`Você sabe onde me encontrar quando acabar o assalto! 
                 BOA SORTE!!`);
     console.log();
     console.log(`Ok. Tudo pronto, bora pro assalto.`);
+    console.log();
     prompt('Tecle [ENTER] para ver o resultado da seu assalto');
     console.clear();
     if (escolhaLug == 1){
@@ -562,11 +639,14 @@ por isso é importante ganhar mais experiência com assaltos menores.`);
 
 function quartoAssalto(){
     let resultado = 'Livre'
+    console.log('4º ASSALTO');
     console.log(`As coisas estão ficando boas, você já está avançando com os assaltos e já tem mais experiência pra
 executar assaltos maiores.`);
     console.log();
     console.log(`Você tem ${personagem.xp} de experiência`);
-    prompt();
+    console.log();
+    prompt('Tecle [ENTER] para continuar.');
+    console.clear();
     console.log(`Agora você já está mais acostumado com o planejamento. 
 Precisamos escolher o local que você irá assaltar, escolha uma das opções: `);
     for (let i of lugaresAssalto){
@@ -578,25 +658,28 @@ Precisamos escolher o local que você irá assaltar, escolha uma das opções: `
         console.log('escolha uma das opções acima: ');
         escolhaLug = +prompt();
     }
+    console.clear();
     console.log(`Muito bem, agora vamos escolher sua ferramenta/arma. Como você já sabe, essas são suas armas disponíveis: `);
     for (let i of ferramentas){
         console.log(i);
     }
-    console.log('Escolha uma das opções utilizando números de 1 a 4:');
+    console.log('Escolha uma das opções utilizando números de 1 a 5:');
     let escolhaArma = +prompt();
     while (escolhaArma < 1 || escolhaArma > 5){
         console.log('escolha uma das opções acima: ');
         escolhaArma = +prompt();
     }
+    console.clear();
     console.log(`Muito bem, estamos prontos para começar, você escolheu assaltar ${lugaresAssalto[escolhaLug - 1]}, 
 com a arma ${ferramentas[escolhaArma - 1]}.`);
     console.log();
-    tempo.passarTempo(0, 2, 30);
+    tempo.passarTempo(0, 3, 30);
     console.log();
     console.log(`Nós nos encontraremos amanhã no mesmo lugar de sempre! 
                 BOA SORTE!!`);
     console.log();
     console.log(`Ok. Tudo pronto, bora pro assalto.`);
+    console.log();
     prompt('Tecle [ENTER] para ver o resultado da seu assalto');
     console.clear();
     if (escolhaLug == 1){
@@ -713,10 +796,14 @@ Você deu sorte que não estava com nenhuma arma, então conseguiu fugir do banc
 
 function quintoAssalto(){
     let resultado = 'Livre'
+    console.log('5º ASSALTO');
+    tempo.passarTempo(0, 0, 0);
     console.log(`Vamos ao último assalto, esse decidirá o seu final.`);
     console.log();
     console.log(`Você tem ${personagem.xp} de experiência`);
-    prompt();
+    console.log();
+    prompt('Tecle [ENTER] para continuar.');
+    console.clear();
     console.log(`E qual local que você irá assaltar para finalizar, escolha uma das opções: `);
     for (let i of lugaresAssalto){
         console.log(i);
@@ -727,25 +814,28 @@ function quintoAssalto(){
         console.log('escolha uma das opções acima: ');
         escolhaLug = +prompt();
     }
+    console.clear();
     console.log(`Muito bem, agora vamos escolher sua ferramenta/arma. Como você já sabe, essas são suas armas disponíveis: `);
     for (let i of ferramentas){
         console.log(i);
     }
-    console.log('Escolha uma das opções utilizando números de 1 a 4:');
+    console.log('Escolha uma das opções utilizando números de 1 a 5:');
     let escolhaArma = +prompt();
     while (escolhaArma < 1 || escolhaArma > 5){
         console.log('escolha uma das opções acima: ');
         escolhaArma = +prompt();
     }
+    console.clear();
     console.log(`Muito bem, estamos prontos para começar, você escolheu assaltar ${lugaresAssalto[escolhaLug - 1]}, 
 com a arma ${ferramentas[escolhaArma - 1]}.`);
     console.log();
-    tempo.passarTempo(0, 2, 30);
+    tempo.passarTempo(0, 3, 30);
     console.log();
     console.log(`Nós nos encontraremos amanhã no mesmo lugar de sempre! 
                 BOA SORTE!!`);
     console.log();
     console.log(`Ok. Tudo pronto, bora pro assalto.`);
+    console.log();
     prompt('Tecle [ENTER] para ver o resultado da seu assalto');
     console.clear();
     if (escolhaLug == 1){
@@ -880,139 +970,259 @@ Jogo_Todo: while(true){
     Uma loja de jóias (60 pontos), concede 30 xp e 10 moral
     Um banco com pouco movimento (75 pontos), concede 40 xp e 15 moral
     O banco principal da cidade (96 pontos), concede 50 xp e 30 moral`);
+    console.log();
     prompt('Tecle [ENTER] para continuar.');
     console.clear();
     console.log(`Use sua lógica para a escolha das armas, não concedem pontos extras, mas algumas não são
-    condizentes com a situação`)
+    condizentes com a situação`);
+    console.log();
     prompt('Tecle [ENTER] para continuar.');
     console.clear();
-    // primeiroAssalto();
-    resultado = primeiroAssalto();
-    if (resultadoum != 'Preso'){
-        console.log(`Você tem agora ${personagem.saldo} reais`)
-        console.log(`Encontrando Javier no esconderijo dia seguinte, ele questiona:
-Você deseja continuar para o próximo assalto?
-[1] Sim
-[2] Não`)
-        let continuar = prompt();
-        while (continuar != 1 && continuar != 2){
-            console.log('escolha uma das opções acima: ');
-            continuar = +prompt();
-        }
-        if (continuar == 1){
-            resultado = segundoAssalto();
-        } else {
-            console.log('É uma pena você já desistir agora, você poderia ganhar muito dinheiro.')
-            break Jogo_Todo;
-        }
+    Assalto1: while(true){
+        resultado = primeiroAssalto();
+        console.log();
+        prompt('Tecle [ENTER] para continuar.');
+        console.clear();
         if (resultado != 'Preso'){
-            console.log(`Você tem agora ${personagem.saldo} reais`)
+            tempo.passarTempo(0, 6, 0);
+            console.log('Depois da fuga...');
+            console.log(`Agora vamos contar todo o dinheiro para saber quanto você tem no total.`);
+            console.log(`Você tem agora ${personagem.saldo} reais`);
+            tempo.passarTempo(0, 2, 50);
+            console.log(`Está na hora de dormir, amanhã tem que se encontrar com Javier bem cedo.`);
+            tempo.passarTempo(0, 12, 10);
             console.log(`Encontrando Javier no esconderijo dia seguinte, ele questiona:
 Você deseja continuar para o próximo assalto?
 [1] Sim
-[2] Não`)
-            let continuar = prompt();
+[2] Não`);
+            continuar = +prompt();
             while (continuar != 1 && continuar != 2){
                 console.log('escolha uma das opções acima: ');
                 continuar = +prompt();
             }
-            if (continuar == 1){
-                resultado = terceiroAssalto();
+            if (continuar == 2){
+                console.log('É uma pena você já desistir agora, você poderia ganhar muito dinheiro.')
+                break Jogo_Todo;
             } else {
+                break Assalto1;
+            }
+        } else {
+            console.log('Você foi preso.');
+            console.log(`Deseja tentar novamente?
+[1] Sim
+[2] Não`);
+            continuar = +prompt();
+            while (continuar != 1 && continuar != 2){
+            console.log('escolha uma das opções acima: ');
+            continuar = +prompt();
+            }
+            if (continuar == 1){
+                continue Assalto1;
+            } else {
+                break Jogo_Todo;
+            }
+        }
+    }
+    Assalto2: while(true){
+        resultado = segundoAssalto();
+        console.log();
+        prompt('Tecle [ENTER] para continuar.');
+        console.clear();
+        if (resultado != 'Preso'){
+            tempo.passarTempo(0, 6, 0);
+            console.log('Depois da fuga...');
+            console.log(`Agora vamos contar todo o dinheiro para saber quanto você tem no total.`);
+            console.log(`Você tem agora ${personagem.saldo} reais`);
+            tempo.passarTempo(0, 2, 50);
+            console.log(`Está na hora de dormir, amanhã tem que se encontrar com Javier bem cedo.`);
+            tempo.passarTempo(0, 12, 10);
+            console.log(`Encontrando Javier no esconderijo dia seguinte, ele questiona:
+Você deseja continuar para o próximo assalto?
+[1] Sim
+[2] Não`);
+            continuar = +prompt();
+            while (continuar != 1 && continuar != 2){
+                console.log('escolha uma das opções acima: ');
+                continuar = +prompt();
+            }
+            if (continuar == 2){
                 console.log(`Você conseguiu um dinheiro extra, mas acha que isso já é o suficiente pra
 viver o resto de sua vida?! Bom, você fez sua escolha, então, boa sorte!`)
                 break Jogo_Todo;
+            } else {
+                break Assalto2;
             }
-            if (resultadotres != 'Preso'){
-                console.log(`Você tem agora ${personagem.saldo} reais`)
-                console.log(`Encontrando Javier no esconderijo dia seguinte, ele questiona:
-Você deseja continuar para o próximo assalto?
+        } else {
+            console.log('Você foi preso.');
+            console.log(`Deseja tentar novamente?
 [1] Sim
-[2] Não`)
-                let continuar = prompt();
-                while (continuar != 1 && continuar != 2){
-                    console.log('escolha uma das opções acima: ');
-                    continuar = +prompt();
-                }
-                if (continuar == 1){
-                    terceiroAssalto();
-                } else {
-                    console.log(`Foi um prazer trabalhar com você, espero que esse tempo de parceria tenha te 
-gerado uma boa quantia de dinheiro para sua vida.`)
-                    break Jogo_Todo;
-                }
+[2] Não`);
+            continuar = +prompt();
+            while (continuar != 1 && continuar != 2){
+            console.log('escolha uma das opções acima: ');
+            continuar = +prompt();
+            }
+            if (continuar == 1){
+                continue Assalto2;
+            } else {
+                break Jogo_Todo;
             }
         }
-    } 
-    console.log('Você foi preso.')
-
-
-} 
-if (personagem.moral > )
-
-/*
-Uma pessoa que recebe um salário que mal dá para sobreviver e que provavelmente vai precisar
-cometer alguns furtos/roubos para que consiga sobreviver e ter uma vida melhor.
-
-Sua história começa em um dia qualquer, em que você vai trabalhar no seu emprego comum, 
-no qual é claramente explorado por seu chefe, que nem sempre paga seu salário no dia correto
-e que faz com que você faça todo tipo de serviço que aquele lugar precisa. Você sabe que todo 
-seu esforço não é recompensado, mas vive o medo de sair do emprego e não conseguir outro que 
-possa pagar seu aluguel e comida, então acaba se sujeitando a essa situação.
-
-Você é uma pessoa simples que quase sempre segue a mesma rotina todos os dias, acorda se levanta
-bem cedo e vai para o serviço, sem mais tanta paciência para aturar o babaca do seu chefe, que 
-age como se fosse o rei do mundo.
-
-Mas em um dia normal, um visitante que nunca fora visto naquele estabelecimento aparece, e 
-de alguma ele atrai sua atenção, ele estava a mexer com alguns papéis, parecendo estar estudando
-sobre algo. Você não consegue identificar um motivo específico pelo qual aquele sujeito te deixou 
-curioso em conhecê-lo. Um sujeito muito discreto e diferente daquelas pessoas comuns desta cidade, 
-usava uma roupa escura, sem tantos detalhes, parecia que não queria chamar tanta atenção.
-
-(escolha entre ir conversar com ele ou não)
-
-if (conversar){
-    Olá, me desculpe interromper sua refeição, mas o senhor é novo por aqui? Nunca o vi por aqui.
-    - O sujeito olha com uma cara estranha, como se dissesse que não queria ser incomodado -
-
-    (insistir e tentar forçar uma amizade ou deixar o sujeito em paz)
-    if (insistir){
-        - O homem respira fundo e lhe cumprimenta e respondi que sim, mas não diz muito de si, 
-        afinal não queria atrair olhares -
-        E então os dois começam a convensar sobre coisas aleatórias, mas não por tanto tempo,
-        afinal seu chefe estava de olho e poderia o reprimir a qualquer momento por não estar 
-        trabalhando. (Não tocou no assunto dos papeis na mesa, já que o homem parecia não estar
-        afim de falar sobre aquilo)
-        personagem.aumentarmoral(10)
-
-    } else (DEIXAR O SUJEITO EM PAZ) {
-        Que rapaz estranho, mal encarado, melhor deixá-lo em paz.
-        - Mas você continua curioso com aqueles papeis que ele estava olhando com tanta atenção -
     }
-} 
-else (NÃO CONVERSAR){
-    Melhor não mexer com esse cara, não parece estar muito a fim de papo.
+    Assalto3: while(true){    
+        resultado = terceiroAssalto();
+        console.log();
+        prompt('Tecle [ENTER] para continuar.');
+        console.clear();
+        if (resultado != 'Preso'){
+            tempo.passarTempo(0, 6, 0);
+            console.log('Depois da fuga...');
+            console.log(`Agora vamos contar todo o dinheiro para saber quanto você tem no total.`);
+            console.log(`Você tem agora ${personagem.saldo} reais`);
+            tempo.passarTempo(0, 2, 50);
+            console.log(`Está na hora de dormir, amanhã tem que se encontrar com Javier bem cedo.`);
+            tempo.passarTempo(0, 12, 10);
+            console.log(`Encontrando Javier no esconderijo dia seguinte, ele questiona:
+Você deseja continuar para o próximo assalto?
+[1] Sim
+[2] Não`);
+            continuar = +prompt();
+            while (continuar != 1 && continuar != 2){
+                console.log('escolha uma das opções acima: ');
+                continuar = +prompt();
+            }
+            if (continuar == 2){
+                console.log(`Foi um prazer trabalhar com você, espero que esse tempo de parceria tenha te 
+gerado uma boa quantia de dinheiro para sua vida.`);
+                break Jogo_Todo;
+            } else {
+                break Assalto3;
+            }
+        } else {
+            console.log('Você foi preso.');
+            console.log(`Deseja tentar novamente?
+[1] Sim
+[2] Não`);
+            continuar = +prompt();
+            while (continuar != 1 && continuar != 2){
+            console.log('escolha uma das opções acima: ');
+            continuar = +prompt();
+            }
+            if (continuar == 1){
+                continue Assalto3;
+            } else {
+                break Jogo_Todo;
+            }
+        }
+    }
+    Assalto4: while(true){
+        resultado = quartoAssalto();
+        console.log();
+        prompt('Tecle [ENTER] para continuar.');
+        console.clear();
+        if (resultado != 'Preso'){
+            tempo.passarTempo(0, 6, 0);
+            console.log('Depois da fuga...');
+            console.log(`Agora vamos contar todo o dinheiro para saber quanto você tem no total.`);
+            console.log(`Você tem agora ${personagem.saldo} reais`);
+            tempo.passarTempo(0, 2, 50);
+            console.log(`Está na hora de dormir, amanhã tem que se encontrar com Javier bem cedo.`);
+            tempo.passarTempo(0, 12, 10);
+            console.log(`Encontrando Javier no esconderijo dia seguinte, ele questiona:
+Você deseja continuar para o próximo assalto?
+[1] Sim
+[2] Não`);
+            continuar = +prompt();
+            while (continuar != 1 && continuar != 2){
+                console.log('escolha uma das opções acima: ');
+                continuar = +prompt();
+            }
+            if (continuar == 2){
+                console.log('É uma pena você já desistir agora, você poderia ganhar muito dinheiro.')
+                break Jogo_Todo;                    
+            } else {
+                break Assalto4;
+            }
+        } else {
+            console.log('Você foi preso.');
+            console.log(`Deseja tentar novamente?
+[1] Sim
+[2] Não`);
+            continuar = +prompt();
+            while (continuar != 1 && continuar != 2){
+            console.log('escolha uma das opções acima: ');
+            continuar = +prompt();
+            }
+            if (continuar == 1){
+                continue Assalto4;
+            } else {
+                break Jogo_Todo;
+            }
+        }
+    }
+    Assalto5: while(true){
+        resultado = quintoAssalto();
+        console.log();
+        prompt('Tecle [ENTER] para continuar.');
+        console.clear();
+        if (resultado != 'Preso'){
+            tempo.passarTempo(0, 6, 0);
+            console.log('Depois da fuga...');
+            console.log(`Agora vamos contar todo o dinheiro para saber quanto você tem no total.`);
+            console.log(`Você tem agora ${personagem.saldo} reais`);
+            tempo.passarTempo(0, 2, 50);
+            console.log(`Está na hora de dormir, amanhã tem que se encontrar com Javier bem cedo.`);
+            tempo.passarTempo(0, 12, 10);
+            console.log(`Encontrando Javier no esconderijo dia seguinte, ele questiona:
+Você deseja continuar para o último assalto?
+[1] Sim
+[2] Não`);
+            continuar = +prompt();
+            while (continuar != 1 && continuar != 2){
+                console.log('escolha uma das opções acima: ');
+                continuar = +prompt();
+            }
+            if (continuar == 2){
+                console.log('É uma pena você já desistir agora, você poderia ganhar muito dinheiro.')
+                break Jogo_Todo;                    
+            } else {
+                break Assalto5;
+            }
+        } else {
+            console.log('Você foi preso.');
+            console.log(`Deseja tentar novamente?
+[1] Sim
+[2] Não`);
+            continuar = +prompt();
+            while (continuar != 1 && continuar != 2){
+            console.log('escolha uma das opções acima: ');
+            continuar = +prompt();
+            }
+            if (continuar == 1){
+                continue Assalto5;
+            } else {
+                break Jogo_Todo;
+            }
+        }
+    }
+    break Jogo_Todo;
+}
+            
+        
+if (personagem.moral >= 65){
+    console.log(`Sua moral com Javier é de ${personagem.moral}`);
+    console.log(`Javier: Sua moral ficou muito alta agora você pode até criar sua própria máfia e ganhar mais dinheiro com
+outros assaltos pela cidade. Já te ensinei tudo o que precisa saber.`);
+} else if (personagem.moral >= 45 && personagem.moral <= 64){
+    console.log(`Sua moral com Javier é de ${personagem.moral}`);
+    console.log(`Javier: Gostei muito de você, venha trabalhar comigo como meu braço direito!`);
+} else if (personagem.moral >= 30 && personagem.moral <= 44){
+    console.log(`Sua moral com Javier é de ${personagem.moral}`);
+    console.log(`Javier: Até que você não é ruim, `);
+} else {
+    console.log(`Javier: Você é muito medroso, não tem perfil para permanecer na nossa equipe`);
 }
 
-Você volta a fazer seu serviço afinal de contas, não quer que seu chefe te perturbe o resto do dia
-gritando com você.
-
-No fim do dia você recebe a diária do serviço e vai pra casa, insatisfeito com aquilo, pois o 
-dinheiro mal daria para comprar a comida do dia e lembrou que o aluguel estava atrasado há algum
-tempo.
-
-(Comprar comida ou guardar para o aluguel)
-if (COMIDA){
-    fome++
-} else (ALUGUEL)
-    aluguel++
-
-Um mercadinho com câmera 
-Um mercadinho com segurança
-um Banco com seguranças armados (se XP menor que um valor (ele é preso ou morre))
-
-*/
 
 
 
