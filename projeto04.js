@@ -31,8 +31,6 @@ let personagem = {
     saldo: 20,
     aluguel: 2,
     estresse: 30,
-    ganancia: 0,
-    suspeita: 0,
     moral: 0,
     xp: 0,
 
@@ -40,16 +38,6 @@ let personagem = {
         this.saldo += dinheiro;
         console.log(`Você tem: ${this.saldo} R$`)
     },
-    aumentarSuspeita: function(susp){
-        this.suspeita += susp;
-        console.log(`Suspeita: ${this.suspeita}`);
-    },
-
-    aumentarGanancia: function(ganan){
-        this.ganancia += ganan;
-        console.log(`Ganância: ${this.ganancia}`)
-    },
-
     aumentarMoral: function(moral){
         this.moral += moral;
         console.log(`Moral: ${this.moral}`)
@@ -77,63 +65,891 @@ let tempo = {
             this.hora++;
             this.minuto -= 60;
         }
-    }
+        console.log(`Já se passaram: ${this.dia} dia(s) ${this.hora} hora(s) e ${this.minuto} desdeo início de tudo isso.`)
+    }   
 }
 
+let resultado = 'livre'
+
 let lugaresAssalto = [
-    '[1] Um idoso na rua', 
+    '[1] Uma idosa na rua', 
     '[2] Um mercadinho de bairro', 
     '[3] Uma loja de jóias', 
     '[4] Um banco com pouco movimento', 
     '[5] O banco principal da cidade'
-]
+];
 let ferramentas = [
     '[1] Nenhuma arma',
     '[2] Taco de basebol',
     '[3] Faca',
     '[4] Pistola',
     '[5] Fuzil AK47'
-]
-function primeiroassalto(){
-    let resultado;
+];
+function primeiroAssalto(){
+    let resultado = 'Livre'
     console.log(`Javier: Agora você irá realizar seu primeiro assalto, deve controlar seu nervosismo
-    e pensar muito sobre o plano. Como você não tem tanta experiência, aconselho começar com uma coisa
-    simples, mas isso é você quem irá decidir, fique a vontade caso queira algo mais complexo, é você que
-    está correndo os riscos. Então vamos começar os preparativos.`);
+e pensar muito sobre o plano. Como você não tem tanta experiência, aconselho começar com uma coisa
+simples, mas isso é você quem irá decidir, fique a vontade caso queira algo mais complexo, é você que
+está correndo os riscos. Então vamos começar os preparativos.`);
+    console.log();
+    console.log(`Você tem ${personagem.xp} de experiência`);
     prompt();
+    console.clear();
     console.log(`Primeiramente precisamos escolher o local que você irá começar, escolha uma
-    das opções: `);
+das opções: `);
     for (let i of lugaresAssalto){
         console.log(i);
     }
-    console.log('Escolha uma das opções utilizando números de 1 a 5')
+    console.log('Escolha uma das opções utilizando números de 1 a 5:');
     let escolhaLug = +prompt();
     while (escolhaLug < 1 || escolhaLug > 5){
         console.log('escolha uma das opções acima: ');
         escolhaLug = +prompt();
     }
-    console.log(`Muito bem, agora vamos escolher sua ferramenta/arma. eu tenho um bom estoque 
-    de armas e ferramentas, mas você só terá acesso a algumas: `)
+    console.clear();
+    console.log(`Muito bem, agora vamos escolher sua ferramenta/arma. Eu tenho um bom estoque 
+de armas e ferramentas, mas você só terá acesso a algumas: `);
     for (let i of ferramentas){
         console.log(i);
     }
-    let escolhaArma = +prompt('Escolha uma das opções utilizando números de 1 a 4');
-    while (escolhaArma < 1 || escolhaArma > 4){
+    console.log('Escolha uma das opções utilizando números de 1 a 4:')
+    let escolhaArma = +prompt();
+    while (escolhaArma < 1 || escolhaArma > 5){
         console.log('escolha uma das opções acima: ');
         escolhaArma = +prompt();
     }
-    console.log(`Muito bem, estamos prontos para começar, você escolheu assaltar 
-    ${lugaresAssalto[escolhaLug]}, com a arma ${ferramentas[escolhaArma]}.`)
-    passarTempo(0, 2, 0)
+    console.clear();
+    console.log(`Muito bem, estamos prontos para começar, você escolheu assaltar ${lugaresAssalto[escolhaLug - 1]}, 
+com a arma ${ferramentas[escolhaArma - 1]}.`);
+    console.log();
+    tempo.passarTempo(0, 2, 30);
+    console.log();
+    console.log(`Para não me envolver com alguma suspeita nos encontraremos amanhã, no nosso esconderijo! 
+                BOA SORTE!!`);
+    console.log();
+    console.log(`Ok. Tudo pronto, bora pro assalto.`);
+    prompt('Tecle [ENTER] para ver o resultado da seu assalto');
+    console.clear();
     if (escolhaLug == 1){
         let chance = Math.ceil(Math.random()*100);
-        if (chance > 10){
-            console.log()
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (escolhaArma == 5){
+            console.log('Você é louco? Achou que ninguém perceberia que você estava carregando um Fuzil no meio da rua?!')
+            console.log('Você mereceu ser preso por essa idiotice.')
+            resultado = 'Preso'
+            return resultado;
+        } else if (chance >= 5){
+            console.log(`Você conseguiu assaltar a senhorinha com sucesso. Não foi tão difícil né?! 
+Isso te da um pouco mais de experiência para os próximos assaltos.`);
+            personagem.mudarSaldo(500);
+            personagem.aumentarXp(10);
+            personagem.aumentarMoral(2);
+            resultado = 'Sucesso';
+            return resultado;
+            } else if (chance >= 3 && chance <= 4) {
+            console.log('Você não conseguiu assaltá-la, mas conseguiu fugir sem que ninguém te pegasse.');
+            resultado = 'Fugiu';
+            return resultado;
+        } else { 
+            console.log(`Você deu azar, estava passando um policial bem na hora e 
+conseguiu prendê-lo antes que roubasse a senhorinha.`);
+            resultado = 'Preso';
+            return resultado;
         }
+    } else if (escolhaLug == 2){
+        let chance = Math.ceil(Math.random()*100);
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (chance >= 30){
+            console.log(`Você conseguiu assaltar o mercadinho com sucesso. 
+Para um primeiro assalto até que você não foi mal.`);
+            personagem.mudarSaldo(2000);
+            personagem.aumentarXp(20);
+            personagem.aumentarMoral(5);
+            resultado = 'Sucesso';
+            return resultado;
+        } else if (chance >= 20 && chance <= 29){
+            console.log(`Essa foi por pouco, você não conseguiu sucesso no roubo, mas pelo menos conseguiu fugir.`);
+            resultado = 'Fugiu';
+            return resultado;
+        } else {
+            console.log(`Você foi preso, não imaginava que a polícia chegaria tão rápido né?!`);
+            resultado = 'Preso';
+            return resultado;
+            }
+    } else if (escolhaLug == 3){
+        let chance = Math.ceil(Math.random()*100);
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (chance >= 60){
+            console.log(`Isso foi bem arriscado, essas lojas possuem muitos sistemas de segurança.
+Mas está de parabéns, foi um roubo muito bem planejado!`);
+            personagem.mudarSaldo(10000);
+            personagem.aumentarXp(30);
+            personagem.aumentarMoral(10);
+            resultado = 'Sucesso';
+            return resultado;
+        } else if (chance >= 50 && chance <= 59){
+            console.log(`Essa foi por pouco, você não conseguiu sucesso no roubo, mas pelo menos conseguiu fugir.`);
+            resultado = 'Fugiu';
+            return resultado;
+        } else {
+            console.log(`A loja de joias sempre possuem maior segurança, infelizmente você foi pego pela polícia.`);
+            resultado = 'Preso';
+            return resultado;
+        }
+    } else if (escolhaLug == 4){
+        let chance = Math.ceil(Math.random()*100);
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (chance >= 75){
+            console.log(`Não imaginei que você conseguiria esse feito. Não tem tanta segurança nesse lugar, mas nunca
+é simples roubar um banco`);
+            personagem.mudarSaldo(20000);
+            personagem.aumentarXp(40);
+            personagem.aumentarMoral(15);
+            resultado = 'Sucesso';
+            return resultado;
+        } else if (chance > 75 && chance <= 84){
+            console.log(`Essa foi por pouco, você não conseguiu sucesso no roubo, mas pelo menos conseguiu fugir.`);
+            resultado = 'Fugiu';
+            return resultado;
+        } else {
+            console.log(`Já era de se esperar, um iniciante tentando roubar um banco?! Se não for muito bem planejado
+a prisão é certa.`);
+            resultado = 'Preso';
+            return resultado;
+        }
+    } else if (escolhaLug == 5){
+        let chance = Math.ceil(Math.random()*100); 
+        console.log(`Você fez ${chance} pontos nesse assalto.`);           
+        if (escolhaArma == 2 || escolhaArma == 3){
+            console.log(`Você está de brincadeira que você tentou assaltar o principal banco da cidade com ${ferramentas[escolhaArma - 1]}...
+            
+Francamente, eu esperava mais de você!`);
+            resultado = 'Preso'
+            return resultado
+        } else if (chance >= 96){
+            if (escolhaArma == 1){
+                console.log(`Suas chances de cometer um furto no principal banco da cidade são mínimas sem a arma adequada.
 
+Você deu sorte que não estava com nenhuma arma, então conseguiu fugir do banco sem tantas suspeitas.`);
+            }
+            console.log(`Você é maluco!! No seu primeiro roubo assaltar o maior banco da cidade?!
+Mas gostei da sua ousadia, parabéns!`);
+            personagem.mudarSaldo(50000);
+            personagem.aumentarXp(50);
+            personagem.aumentarMoral(20);
+            resultado = 'Sucesso';
+            return resultado;
+        } else if (chance > 90 && chance <= 95){
+            console.log(`Essa foi por pouco, você não conseguiu sucesso no roubo, mas pelo menos conseguiu fugir.`);
+            resultado = 'Fugiu';
+            return resultado;
+        } else {
+            console.log(`Eu vi sua patética tentativa, mal conseguiu entrar no banco e o primeiro guarda te pegou,
+por isso é importante começar com assaltos menores.`);
+            resultado = 'Preso';
+            return resultado;
+        }
     }
 }
-primeiroassalto();
+
+function segundoAssalto(){
+    let resultado = 'Livre'
+    console.log(`Agora você já teve uma breve experiência de como é um assalto, vamos ao segundo assalto.
+Se você obteve sucesso no roubo anterior você terá um pouco mais de facilidade para realizar os próximos.`);
+    console.log();
+    console.log(`Você tem ${personagem.xp} de experiência`);
+    prompt();
+    console.log(`Agora precisamos escolher o local que você irá assaltar, escolha uma das opções: `);
+    for (let i of lugaresAssalto){
+        console.log(i);
+    }
+    console.log('Escolha uma das opções utilizando números de 1 a 5:');
+    let escolhaLug = +prompt();
+    while (escolhaLug < 1 || escolhaLug > 5){
+        console.log('escolha uma das opções acima: ');
+        escolhaLug = +prompt();
+    }
+    console.log(`Muito bem, agora vamos escolher sua ferramenta/arma. Eu tenho um bom estoque 
+de armas e ferramentas, mas você só terá acesso a algumas: `);
+    for (let i of ferramentas){
+        console.log(i);
+    }
+    console.log('Escolha uma das opções utilizando números de 1 a 4:');
+    let escolhaArma = +prompt();
+    while (escolhaArma < 1 || escolhaArma > 5){
+        console.log('escolha uma das opções acima: ');
+        escolhaArma = +prompt();
+    }
+    console.log(`Muito bem, estamos prontos para começar, você escolheu assaltar ${lugaresAssalto[escolhaLug - 1]}, 
+com a arma ${ferramentas[escolhaArma - 1]}.`);
+    console.log();
+    tempo.passarTempo(0, 2, 30);
+    console.log();
+    console.log(`Novamente, para não me envolver com alguma suspeita nos encontraremos amanhã, no nosso esconderijo! 
+                BOA SORTE!!`);
+    console.log();
+    console.log(`Ok. Tudo pronto, bora pro assalto.`);
+    prompt('Tecle [ENTER] para ver o resultado da seu assalto');
+    console.clear();
+    if (escolhaLug == 1){
+        let chance = Math.ceil(Math.random()*100) + personagem.xp;
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (escolhaArma == 5){
+            console.log('Você é louco? Achou que ninguém perceberia que você estava carregando um Fuzil no meio da rua?!')
+            console.log('Você mereceu ser preso por essa idiotice.')
+            resultado = 'Preso'
+            return resultado;
+        } else if (chance >= 5){
+            console.log(`Você conseguiu assaltar a senhorinha com sucesso. Não foi tão difícil né?! 
+Isso te da um pouco mais de experiência para os próximos assaltos.`);
+            personagem.mudarSaldo(500);
+            personagem.aumentarXp(10);
+            personagem.aumentarMoral(2);
+            resultado = 'Sucesso';
+            return resultado;
+            } else if (chance >= 3 && chance <= 4) {
+            console.log('Você não conseguiu assaltá-la, mas conseguiu fugir sem que ninguém te pegasse.');
+            resultado = 'Fugiu';
+            return resultado;
+        } else { 
+            console.log(`Você deu azar, estava passando um policial bem na hora e 
+conseguiu prendê-lo antes que roubasse a senhorinha.`);
+            resultado = 'Preso';
+            return resultado;
+        }
+    } else if (escolhaLug == 2){
+        let chance = Math.ceil(Math.random()*100) + personagem.xp;
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (chance >= 30){
+            console.log(`Você conseguiu assaltar o mercadinho com sucesso. Já está muito mais ágil que da primeira vez.`);
+            personagem.mudarSaldo(2000);
+            personagem.aumentarXp(20);
+            personagem.aumentarMoral(5);
+            resultado = 'Sucesso';
+            return resultado;
+        } else if (chance >= 20 && chance <= 29){
+            console.log(`Essa foi por pouco, você não conseguiu sucesso no roubo, mas pelo menos conseguiu fugir.`);
+            resultado = 'Fugiu';
+            return resultado;
+        } else {
+            console.log(`Você foi preso, não imaginava que a polícia chegaria tão rápido né?!`);
+            resultado = 'Preso';
+            return resultado;
+            }
+    } else if (escolhaLug == 3){
+        let chance = Math.ceil(Math.random()*100) + personagem.xp;
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (chance >= 60){
+            console.log(`Isso foi bem arriscado, essas lojas possuem muitos sistemas de segurança.
+Mas está de parabéns, foi um roubo muito bem planejado!`);
+            personagem.mudarSaldo(10000);
+            personagem.aumentarXp(30);
+            personagem.aumentarMoral(10);
+            resultado = 'Sucesso';
+            return resultado;
+        } else if (chance >= 50 && chance <= 59){
+            console.log(`Essa foi por pouco, você não conseguiu sucesso no roubo, mas pelo menos conseguiu fugir.`);
+            resultado = 'Fugiu';
+            return resultado;
+        } else {
+            console.log(`A loja de joias sempre possuem maior segurança, infelizmente você foi pego pela polícia.`);
+            resultado = 'Preso';
+            return resultado;
+        }
+    } else if (escolhaLug == 4){
+        let chance = Math.ceil(Math.random()*100) + personagem.xp;
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (chance >= 75){
+            console.log(`Não imaginei que você conseguiria esse feito. Não tem tanta segurança nesse lugar, mas nunca
+é simples roubar um banco`);
+            personagem.mudarSaldo(20000);
+            personagem.aumentarXp(40);
+            personagem.aumentarMoral(15);
+            resultado = 'Sucesso';
+            return resultado;
+        } else if (chance >= 65 && chance <= 74){
+            console.log(`Essa foi por pouco, você não conseguiu sucesso no roubo, mas pelo menos conseguiu fugir.`);
+            resultado = 'Fugiu';
+            return resultado;
+        } else {
+            console.log(`Já era de se esperar, um iniciante tentando roubar um banco?! Se não for muito bem planejado
+a prisão é certa.`);
+            resultado = 'Preso';
+            return resultado;
+        }
+    } else if (escolhaLug == 5){
+        let chance = Math.ceil(Math.random()*100) + personagem.xp;
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (chance >= 96){
+            if (escolhaArma == 1){
+                console.log(`Suas chances de cometer um furto no principal banco da cidade são mínimas sem a arma adequada.
+
+Você deu sorte que não estava com nenhuma arma, então conseguiu fugir do banco sem tantas suspeitas.`);
+            }
+            console.log(`Você é maluco!! Com tão pouca experiência assaltar o maior banco da cidade?!
+Mas gostei da sua ousadia, parabéns!`);
+            personagem.mudarSaldo(50000);
+            personagem.aumentarXp(50);
+            personagem.aumentarMoral(20);
+            resultado = 'Sucesso';
+            return resultado;
+        } else if (chance >= 90 && chance <= 95){
+            console.log(`Essa foi por pouco, você não conseguiu sucesso no roubo, mas pelo menos conseguiu fugir.`);
+            resultado = 'Fugiu';
+            return resultado;
+        } else {
+            console.log(`Eu vi sua patética tentativa, mal conseguiu entrar no banco e o primeiro guarda te pegou,
+por isso é importante ganhar mais experiência com assaltos menores.`);
+            resultado = 'Preso';
+            return resultado;
+        }
+    }
+}
+
+function terceiroAssalto(){
+    let resultado = 'Livre'
+    console.log(`As coisas estão ficando boas, você já está avançando com os assaltos e já tem mais experiência pra
+executar assaltos maiores.`);
+    console.log();
+    console.log(`Você tem ${personagem.xp} de experiência`);
+    prompt();
+    console.log(`Agora você já está mais acostumado com o planejamento. 
+Precisamos escolher o local que você irá assaltar, escolha uma das opções: `);
+    for (let i of lugaresAssalto){
+        console.log(i);
+    }
+    console.log('Escolha uma das opções utilizando números de 1 a 5:');
+    let escolhaLug = +prompt();
+    while (escolhaLug < 1 || escolhaLug > 5){
+        console.log('escolha uma das opções acima: ');
+        escolhaLug = +prompt();
+    }
+    console.log(`Muito bem, agora vamos escolher sua ferramenta/arma. Como você já sabe, essas são suas armas disponíveis: `);
+    for (let i of ferramentas){
+        console.log(i);
+    }
+    console.log('Escolha uma das opções utilizando números de 1 a 4:');
+    let escolhaArma = +prompt();
+    while (escolhaArma < 1 || escolhaArma > 5){
+        console.log('escolha uma das opções acima: ');
+        escolhaArma = +prompt();
+    }
+    console.log(`Muito bem, estamos prontos para começar, você escolheu assaltar ${lugaresAssalto[escolhaLug - 1]}, 
+com a arma ${ferramentas[escolhaArma - 1]}.`);
+    console.log();
+    tempo.passarTempo(0, 2, 30);
+    console.log();
+    console.log(`Você sabe onde me encontrar quando acabar o assalto! 
+                BOA SORTE!!`);
+    console.log();
+    console.log(`Ok. Tudo pronto, bora pro assalto.`);
+    prompt('Tecle [ENTER] para ver o resultado da seu assalto');
+    console.clear();
+    if (escolhaLug == 1){
+        let chance = Math.ceil(Math.random()*100) + personagem.xp;
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (escolhaArma == 5){
+            console.log('Você é louco? Achou que ninguém perceberia que você estava carregando um Fuzil no meio da rua?!')
+            console.log('Você mereceu ser preso por essa idiotice.')
+            resultado = 'Preso'
+            return resultado;
+        } else if (chance >= 5){
+            console.log(`Você já passou dessa fase de assaltar senhorinhas na rua né?! Tente algo mais desafiador,
+desse jeito não conseguirá tanto dinheiro quanto poderia.`);
+            personagem.mudarSaldo(500);
+            personagem.aumentarXp(10);
+            personagem.aumentarMoral(2);
+            resultado = 'Sucesso';
+            return resultado;
+            } else if (chance >= 3 && chance <= 4) {
+            console.log('Você não conseguiu assaltá-la, mas conseguiu fugir sem que ninguém te pegasse.');
+            resultado = 'Fugiu';
+            return resultado;
+        } else { 
+            console.log(`Você deu azar, estava passando um policial bem na hora e 
+conseguiu prendê-lo antes que roubasse a senhorinha.`);
+            resultado = 'Preso';
+            return resultado;
+        }
+    } else if (escolhaLug == 2){
+        let chance = Math.ceil(Math.random()*100) + personagem.xp;
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (chance >= 30){
+            console.log(`Você conseguiu assaltar o mercadinho com sucesso. Você está bem melhor que das primeiras vezes.`);
+            personagem.mudarSaldo(2000)
+            personagem.aumentarXp(20);
+            personagem.aumentarMoral(5);
+            resultado = 'Sucesso';
+            return resultado;
+        } else if (chance >= 20 && chance <= 29){
+            console.log(`Essa foi por pouco, você não conseguiu sucesso no roubo, mas pelo menos conseguiu fugir.`);
+            resultado = 'Fugiu';
+            return resultado;
+        } else {
+            console.log(`Você foi preso, não imaginava que a polícia chegaria tão rápido né?!`);
+            resultado = 'Preso';
+            return resultado;
+            }
+    } else if (escolhaLug == 3){
+        let chance = Math.ceil(Math.random()*100 + personagem.xp);
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (chance >= 60){
+            console.log(`Isso foi bem arriscado, essas lojas possuem muitos sistemas de segurança.
+Mas está de parabéns, foi um roubo muito bem planejado!`);
+            personagem.mudarSaldo(10000)
+            personagem.aumentarXp(30);
+            personagem.aumentarMoral(10);
+            resultado = 'Sucesso';
+            return resultado;
+        } else if (chance >= 50 && chance <= 59){
+            console.log(`Essa foi por pouco, você não conseguiu sucesso no roubo, mas pelo menos conseguiu fugir.`);
+            resultado = 'Fugiu';
+            return resultado;
+        } else {
+            console.log(`A loja de joias sempre possuem maior segurança, infelizmente você foi pego pela polícia.`);
+            resultado = 'Preso';
+            return resultado;
+        }
+    } else if (escolhaLug == 4){
+        let chance = Math.ceil(Math.random()*100) + personagem.xp;
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (chance >= 75){
+            console.log(`Não imaginei que você conseguiria esse feito. Não tem tanta segurança nesse lugar, mas nunca
+é simples roubar um banco`);
+            personagem.mudarSaldo(20000);
+            personagem.aumentarXp(40);
+            personagem.aumentarMoral(15);
+            resultado = 'Sucesso';
+            return resultado;
+        } else if (chance >= 65 && chance <= 74){
+            console.log(`Essa foi por pouco, você não conseguiu sucesso no roubo, mas pelo menos conseguiu fugir.`);
+            resultado = 'Fugiu';
+            return resultado;
+        } else {
+            console.log(`Já era de se esperar, um iniciante tentando roubar um banco?! Se não for muito bem planejado
+a prisão é certa.`);
+            resultado = 'Preso';
+            return resultado;
+        }
+    } else if (escolhaLug == 5){
+        let chance = Math.ceil(Math.random()*100) + personagem.xp;
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (chance >= 96){
+            if (escolhaArma == 1){
+                console.log(`Suas chances de cometer um furto no principal banco da cidade são mínimas sem a arma adequada.
+
+Você deu sorte que não estava com nenhuma arma, então conseguiu fugir do banco sem tantas suspeitas.`);
+            }
+            console.log(`Você é maluco!! Com tão pouca experiência assaltar o maior banco da cidade?!
+Mas gostei da sua ousadia, parabéns!`);
+            personagem.mudarSaldo(50000);
+            personagem.aumentarXp(50);
+            personagem.aumentarMoral(20);
+            resultado = 'Sucesso';
+            return resultado;
+        } else if (chance >= 90 && chance <= 95){
+            console.log(`Essa foi por pouco, você não conseguiu sucesso no roubo, mas pelo menos conseguiu fugir.`);
+            resultado = 'Fugiu';
+            return resultado;
+        } else {
+            console.log(`Eu vi sua patética tentativa, mal conseguiu entrar no banco e o primeiro guarda te pegou,
+por isso é importante ganhar mais experiência com assaltos menores.`);
+            resultado = 'Preso';
+            return resultado;
+        }
+    }
+}
+
+function quartoAssalto(){
+    let resultado = 'Livre'
+    console.log(`As coisas estão ficando boas, você já está avançando com os assaltos e já tem mais experiência pra
+executar assaltos maiores.`);
+    console.log();
+    console.log(`Você tem ${personagem.xp} de experiência`);
+    prompt();
+    console.log(`Agora você já está mais acostumado com o planejamento. 
+Precisamos escolher o local que você irá assaltar, escolha uma das opções: `);
+    for (let i of lugaresAssalto){
+        console.log(i);
+    }
+    console.log('Escolha uma das opções utilizando números de 1 a 5:');
+    let escolhaLug = +prompt();
+    while (escolhaLug < 1 || escolhaLug > 5){
+        console.log('escolha uma das opções acima: ');
+        escolhaLug = +prompt();
+    }
+    console.log(`Muito bem, agora vamos escolher sua ferramenta/arma. Como você já sabe, essas são suas armas disponíveis: `);
+    for (let i of ferramentas){
+        console.log(i);
+    }
+    console.log('Escolha uma das opções utilizando números de 1 a 4:');
+    let escolhaArma = +prompt();
+    while (escolhaArma < 1 || escolhaArma > 5){
+        console.log('escolha uma das opções acima: ');
+        escolhaArma = +prompt();
+    }
+    console.log(`Muito bem, estamos prontos para começar, você escolheu assaltar ${lugaresAssalto[escolhaLug - 1]}, 
+com a arma ${ferramentas[escolhaArma - 1]}.`);
+    console.log();
+    tempo.passarTempo(0, 2, 30);
+    console.log();
+    console.log(`Nós nos encontraremos amanhã no mesmo lugar de sempre! 
+                BOA SORTE!!`);
+    console.log();
+    console.log(`Ok. Tudo pronto, bora pro assalto.`);
+    prompt('Tecle [ENTER] para ver o resultado da seu assalto');
+    console.clear();
+    if (escolhaLug == 1){
+        let chance = Math.ceil(Math.random()*100) + personagem.xp;
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (escolhaArma == 5){
+            console.log('Você é louco? Achou que ninguém perceberia que você estava carregando um Fuzil no meio da rua?!')
+            console.log('Você mereceu ser preso por essa idiotice.')
+            resultado = 'Preso'
+            return resultado;
+        } else if (chance >= 5){
+            console.log(`Você já passou dessa fase de assaltar senhorinhas na rua né?! Tente algo mais desafiador,
+desse jeito não conseguirá tanto dinheiro quanto poderia.`);
+            personagem.mudarSaldo(500);
+            personagem.aumentarXp(10);
+            personagem.aumentarMoral(2);
+            resultado = 'Sucesso';
+            return resultado;
+            } else if (chance >= 3 && chance <= 4) {
+            console.log('Você não conseguiu assaltá-la, mas conseguiu fugir sem que ninguém te pegasse.');
+            resultado = 'Fugiu';
+            return resultado;
+        } else { 
+            console.log(`Você deu azar, estava passando um policial bem na hora e 
+conseguiu prendê-lo antes que roubasse a senhorinha.`);
+            resultado = 'Preso';
+            return resultado;
+        }
+    } else if (escolhaLug == 2){
+        let chance = Math.ceil(Math.random()*100) + personagem.xp;
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (chance >= 30){
+            console.log(`Você conseguiu assaltar o mercadinho com sucesso. Mas já está na hora de tentar algo maior.`);
+            personagem.mudarSaldo(2000);
+            personagem.aumentarXp(20);
+            personagem.aumentarMoral(5);
+            resultado = 'Sucesso';
+            return resultado;
+        } else if (chance >= 20 && chance <= 29){
+            console.log(`Essa foi por pouco, você não conseguiu sucesso no roubo, mas pelo menos conseguiu fugir.`);
+            resultado = 'Fugiu';
+            return resultado;
+        } else {
+            console.log(`Você foi preso, não imaginava que a polícia chegaria tão rápido né?!`);
+            resultado = 'Preso';
+            return resultado;
+        }
+    } else if (escolhaLug == 3){
+        let chance = Math.ceil(Math.random()*100) + personagem.xp;
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (chance >= 60){
+            console.log(`Isso foi bem arriscado, essas lojas possuem muitos sistemas de segurança.
+Mas está de parabéns, foi um roubo muito bem planejado!`);
+            personagem.mudarSaldo(10000);
+            personagem.aumentarXp(30);
+            personagem.aumentarMoral(10);
+            resultado = 'Sucesso';
+            return resultado;
+        } else if (chance >= 50 && chance <= 59){
+            console.log(`Essa foi por pouco, você não conseguiu sucesso no roubo, mas pelo menos conseguiu fugir.`);
+            resultado = 'Fugiu';
+            return resultado;
+        } else {
+            console.log(`A loja de joias sempre possuem maior segurança, infelizmente você foi pego pela polícia.`);
+            resultado = 'Preso';
+            return resultado;
+        }
+    } else if (escolhaLug == 4){
+        let chance = Math.ceil(Math.random()*100) + personagem.xp;
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (chance >= 75){
+            console.log(`Não imaginei que você conseguiria esse feito. Não tem tanta segurança nesse banco, mas nunca
+é simples roubar um banco`);
+            personagem.mudarSaldo(20000);
+            personagem.aumentarXp(40);
+            personagem.aumentarMoral(15);
+            resultado = 'Sucesso';
+            return resultado;
+        } else if (chance >= 65 && chance <= 74){
+            console.log(`Essa foi por pouco, você não conseguiu sucesso no roubo, mas pelo menos conseguiu fugir.`);
+            resultado = 'Fugiu';
+            return resultado;
+        } else {
+            console.log(`Bom, não foi dessa vez, se planejarmos um pouco melhor conseguiremos roubar todo o dinheiro desse banco!!`);
+            resultado = 'Preso';
+            return resultado;
+        }
+    } else if (escolhaLug == 5){
+        let chance = Math.ceil(Math.random()*100) + personagem.xp;
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (chance >= 96){
+            if (escolhaArma == 1){
+                console.log(`Suas chances de cometer um furto no principal banco da cidade são mínimas sem a arma adequada.
+
+Você deu sorte que não estava com nenhuma arma, então conseguiu fugir do banco sem tantas suspeitas.`);
+            }
+            console.log(`Você avançou muito, já está conseguindo fazer grandes roubos`);
+            personagem.mudarSaldo(50000);
+            personagem.aumentarXp(50);
+            personagem.aumentarMoral(20);
+            resultado = 'Sucesso';
+            return resultado;
+        } else if (chance >= 90 && chance <= 95){
+            console.log(`Essa foi por pouco, você não conseguiu sucesso no roubo, mas pelo menos conseguiu fugir.`);
+            resultado = 'Fugiu';
+            return resultado;
+        } else {
+            console.log(`Bom, não foi dessa vez, se planejarmos um pouco melhor conseguiremos roubar todo o dinheiro desse banco!!`);
+            resultado = 'Preso';
+            return resultado;
+        }
+    }
+}
+
+function quintoAssalto(){
+    let resultado = 'Livre'
+    console.log(`Vamos ao último assalto, esse decidirá o seu final.`);
+    console.log();
+    console.log(`Você tem ${personagem.xp} de experiência`);
+    prompt();
+    console.log(`E qual local que você irá assaltar para finalizar, escolha uma das opções: `);
+    for (let i of lugaresAssalto){
+        console.log(i);
+    }
+    console.log('Escolha uma das opções utilizando números de 1 a 5:');
+    let escolhaLug = +prompt();
+    while (escolhaLug < 1 || escolhaLug > 5){
+        console.log('escolha uma das opções acima: ');
+        escolhaLug = +prompt();
+    }
+    console.log(`Muito bem, agora vamos escolher sua ferramenta/arma. Como você já sabe, essas são suas armas disponíveis: `);
+    for (let i of ferramentas){
+        console.log(i);
+    }
+    console.log('Escolha uma das opções utilizando números de 1 a 4:');
+    let escolhaArma = +prompt();
+    while (escolhaArma < 1 || escolhaArma > 5){
+        console.log('escolha uma das opções acima: ');
+        escolhaArma = +prompt();
+    }
+    console.log(`Muito bem, estamos prontos para começar, você escolheu assaltar ${lugaresAssalto[escolhaLug - 1]}, 
+com a arma ${ferramentas[escolhaArma - 1]}.`);
+    console.log();
+    tempo.passarTempo(0, 2, 30);
+    console.log();
+    console.log(`Nós nos encontraremos amanhã no mesmo lugar de sempre! 
+                BOA SORTE!!`);
+    console.log();
+    console.log(`Ok. Tudo pronto, bora pro assalto.`);
+    prompt('Tecle [ENTER] para ver o resultado da seu assalto');
+    console.clear();
+    if (escolhaLug == 1){
+        let chance = Math.ceil(Math.random()*100) + personagem.xp;
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (escolhaArma == 5){
+            console.log('Você é louco? Achou que ninguém perceberia que você estava carregando um Fuzil no meio da rua?!')
+            console.log('Você mereceu ser preso por essa idiotice.')
+            resultado = 'Preso'
+            return resultado;
+        } else if (chance >= 5){
+            console.log(`Você já passou dessa fase de assaltar senhorinhas na rua né?! Tente algo mais desafiador,
+desse jeito não conseguirá tanto dinheiro quanto poderia.`);
+            personagem.mudarSaldo(500);
+            personagem.aumentarXp(10);
+            personagem.aumentarMoral(2);
+            resultado = 'Sucesso';
+            return resultado;
+            } else if (chance >= 3 && chance <= 4) {
+            console.log('Você não conseguiu assaltá-la, mas conseguiu fugir sem que ninguém te pegasse.');
+            resultado = 'Fugiu';
+            return resultado;
+        } else { 
+            console.log(`Você deu azar, estava passando um policial bem na hora e 
+conseguiu prendê-lo antes que roubasse a senhorinha.`);
+            resultado = 'Preso';
+            return resultado;
+        }
+    } else if (escolhaLug == 2){
+        let chance = Math.ceil(Math.random()*100) + personagem.xp;
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (chance >= 30){
+            console.log(`Você conseguiu assaltar o mercadinho com sucesso. Mas já está na hora de tentar algo maior.`);
+            personagem.mudarSaldo(2000);
+            personagem.aumentarXp(20);
+            personagem.aumentarMoral(5);
+            resultado = 'Sucesso';
+            return resultado;
+        } else if (chance >= 20 && chance <= 29){
+            console.log(`Essa foi por pouco, você não conseguiu sucesso no roubo, mas pelo menos conseguiu fugir.`);
+            resultado = 'Fugiu';
+            return resultado;
+        } else {
+            console.log(`Você foi preso, não imaginava que a polícia chegaria tão rápido né?!`);
+            resultado = 'Preso';
+            return resultado;
+        }
+    } else if (escolhaLug == 3){
+        let chance = Math.ceil(Math.random()*100) + personagem.xp;
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (chance >= 60){
+            console.log(`Isso foi bem arriscado, essas lojas possuem muitos sistemas de segurança.
+Mas está de parabéns, foi um roubo muito bem planejado!`);
+            personagem.mudarSaldo(10000);
+            personagem.aumentarXp(30);
+            personagem.aumentarMoral(10);
+            resultado = 'Sucesso';
+            return resultado;
+        } else if (chance >= 50 && chance <= 59){
+            console.log(`Essa foi por pouco, você não conseguiu sucesso no roubo, mas pelo menos conseguiu fugir.`);
+            resultado = 'Fugiu';
+            return resultado;
+        } else {
+            console.log(`A loja de joias sempre possuem maior segurança, infelizmente você foi pego pela polícia.`);
+            resultado = 'Preso';
+            return resultado;
+        }
+    } else if (escolhaLug == 4){
+        let chance = Math.ceil(Math.random()*100) + personagem.xp;
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (chance >= 75){
+            console.log(`Não imaginei que você conseguiria esse feito. Não tem tanta segurança nesse banco, mas nunca
+é simples roubar um banco`);
+            personagem.mudarSaldo(20000);
+            personagem.aumentarXp(40);
+            personagem.aumentarMoral(15);
+            resultado = 'Sucesso';
+            return resultado;
+        } else if (chance >= 65 && chance <= 74){
+            console.log(`Essa foi por pouco, você não conseguiu sucesso no roubo, mas pelo menos conseguiu fugir.`);
+            resultado = 'Fugiu';
+            return resultado;
+        } else {
+            console.log(`Bom, não foi dessa vez, se planejarmos um pouco melhor conseguiremos roubar todo o dinheiro desse banco!!`);
+            resultado = 'Preso';
+            return resultado;
+        }
+    } else if (escolhaLug == 5){
+        let chance = Math.ceil(Math.random()*100) + personagem.xp;
+        console.log(`Você fez ${chance} pontos nesse assalto.`);
+        if (chance >= 96){
+            if (escolhaArma == 1){
+                console.log(`Suas chances de cometer um furto no principal banco da cidade são mínimas sem a arma adequada.
+
+Você deu sorte que não estava com nenhuma arma, então conseguiu fugir do banco sem tantas suspeitas.`);
+            }
+            console.log(`Você avançou muito, já está conseguindo fazer grandes roubos`);
+            personagem.mudarSaldo(50000);
+            personagem.aumentarXp(50);
+            personagem.aumentarMoral(20);
+            resultado = 'Sucesso';
+            return resultado;
+        } else if (chance >= 90 && chance <= 95){
+            console.log(`Essa foi por pouco, você não conseguiu sucesso no roubo, mas pelo menos conseguiu fugir.`);
+            resultado = 'Fugiu';
+            return resultado;
+        } else {
+            console.log(`Bom, não foi dessa vez, se planejarmos um pouco melhor conseguiremos roubar todo o dinheiro desse banco!!`);
+            resultado = 'Preso';
+            return resultado;
+        }
+    }
+}
+
+
+Jogo_Todo: while(true){
+    console.log(`Ok. Já que você escolheu seguir na vida do crime, saiba que não é fácil e é importante 
+    passar algumas informações para você antes de começarmos:
+
+    Eu vou lhe passar uma lista de opções para assaltar, serão listadas da mais fácil até a mais difícil.
+    Quanto mais difícil, mais experiência você conseguirá, mas você correrá mais risco de ser preso.
+    A experiência aumenta sua chance de sucesso para os próximos assaltos. Você ganhará moral com cada assalto 
+    feito, e assim como a experiência, quanto mais difícil, mais moral. A moral servirá para decidir seu 
+    cargo final, caso consiga fazer todos os assaltos.`);
+    console.log();
+    prompt('Tecle [ENTER] para continuar.');
+    console.clear();
+    console.log(`Suas chances são as seguintes, será escolhido um número aleatório para você e somado a sua
+    experiência você deve tirar mais que:
+    Uma idosa na rua (5 pontos), concede 10 xp e 2 moral
+    Um mercadinho de bairro (30 pontos), concede 20 xp e 5 moral
+    Uma loja de jóias (60 pontos), concede 30 xp e 10 moral
+    Um banco com pouco movimento (75 pontos), concede 40 xp e 15 moral
+    O banco principal da cidade (96 pontos), concede 50 xp e 30 moral`);
+    prompt('Tecle [ENTER] para continuar.');
+    console.clear();
+    console.log(`Use sua lógica para a escolha das armas, não concedem pontos extras, mas algumas não são
+    condizentes com a situação`)
+    prompt('Tecle [ENTER] para continuar.');
+    console.clear();
+    // primeiroAssalto();
+    resultado = primeiroAssalto();
+    if (resultadoum != 'Preso'){
+        console.log(`Você tem agora ${personagem.saldo} reais`)
+        console.log(`Encontrando Javier no esconderijo dia seguinte, ele questiona:
+Você deseja continuar para o próximo assalto?
+[1] Sim
+[2] Não`)
+        let continuar = prompt();
+        while (continuar != 1 && continuar != 2){
+            console.log('escolha uma das opções acima: ');
+            continuar = +prompt();
+        }
+        if (continuar == 1){
+            resultado = segundoAssalto();
+        } else {
+            console.log('É uma pena você já desistir agora, você poderia ganhar muito dinheiro.')
+            break Jogo_Todo;
+        }
+        if (resultado != 'Preso'){
+            console.log(`Você tem agora ${personagem.saldo} reais`)
+            console.log(`Encontrando Javier no esconderijo dia seguinte, ele questiona:
+Você deseja continuar para o próximo assalto?
+[1] Sim
+[2] Não`)
+            let continuar = prompt();
+            while (continuar != 1 && continuar != 2){
+                console.log('escolha uma das opções acima: ');
+                continuar = +prompt();
+            }
+            if (continuar == 1){
+                resultado = terceiroAssalto();
+            } else {
+                console.log(`Você conseguiu um dinheiro extra, mas acha que isso já é o suficiente pra
+viver o resto de sua vida?! Bom, você fez sua escolha, então, boa sorte!`)
+                break Jogo_Todo;
+            }
+            if (resultadotres != 'Preso'){
+                console.log(`Você tem agora ${personagem.saldo} reais`)
+                console.log(`Encontrando Javier no esconderijo dia seguinte, ele questiona:
+Você deseja continuar para o próximo assalto?
+[1] Sim
+[2] Não`)
+                let continuar = prompt();
+                while (continuar != 1 && continuar != 2){
+                    console.log('escolha uma das opções acima: ');
+                    continuar = +prompt();
+                }
+                if (continuar == 1){
+                    terceiroAssalto();
+                } else {
+                    console.log(`Foi um prazer trabalhar com você, espero que esse tempo de parceria tenha te 
+gerado uma boa quantia de dinheiro para sua vida.`)
+                    break Jogo_Todo;
+                }
+            }
+        }
+    } 
+    console.log('Você foi preso.')
+
+
+} 
+if (personagem.moral > )
+
 /*
 Uma pessoa que recebe um salário que mal dá para sobreviver e que provavelmente vai precisar
 cometer alguns furtos/roubos para que consiga sobreviver e ter uma vida melhor.
