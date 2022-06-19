@@ -10,7 +10,7 @@ Um controle de passagem de tempo que determina o começo e o fim de cada ciclo.
 Agora podemos começar a organizar tudo isso, e seria bom pensarmos em funções para 
 executar cada uma das tarefas. Portanto para hoje nossos objetivos serão:
 - Determinar quais funções serão usadas (Determinar fim do ciclo? Resetar os status 
-    do personagem? Fazer controle da passagem de tempo?);
+do personagem? Fazer controle da passagem de tempo?);
 - Determinar quais variáveis serão usadas e alteradas por elas;
 - Implementar essas funções de maneira eficiente;
 
@@ -88,10 +88,7 @@ um Banco com seguranças armados (se XP menor que um valor (ele é preso ou morr
 
 let personagem = {
     nome: 'Felipe',
-    saudeFome: 50,
     saldo: 0,
-    aluguel: 2,
-    estresse: 30,
     moral: 0,
     xp: 0,
 
@@ -134,6 +131,7 @@ let tempo = {
 
 let resultado = 'livre';
 let continuar = 0;
+let chances = 5;
 
 const lugaresAssalto = [
     '[1] Uma idosa na rua', 
@@ -152,6 +150,7 @@ const ferramentas = [
 
 function primeiroAssalto(){
     let resultado = 'Livre'
+    tempo.passarTempo(0, 0, 0);
     console.log('1º ASSALTO');
     console.log(`Javier: Agora você irá realizar seu primeiro assalto, deve controlar seu nervosismo
 e pensar muito sobre o plano. Como você não tem tanta experiência, aconselho começar com uma coisa
@@ -319,6 +318,7 @@ por isso é importante começar com assaltos menores.`);
 
 function segundoAssalto(){
     let resultado = 'Livre'
+    tempo.passarTempo(0, 0, 0);
     console.log('2º ASSALTO');
     console.log(`Agora você já teve uma breve experiência de como é um assalto, vamos ao segundo assalto.
 Se você obteve sucesso no roubo anterior você terá um pouco mais de facilidade para realizar os próximos.`);
@@ -356,7 +356,7 @@ com a arma ${ferramentas[escolhaArma - 1]}.`);
     tempo.passarTempo(0, 3, 30);
     console.log();
     console.log(`Novamente, para não me envolver com alguma suspeita nos encontraremos amanhã, no nosso esconderijo! 
-                BOA SORTE!!`);
+                                    BOA SORTE!!`);
     console.log();
     console.log(`Ok. Tudo pronto, bora pro assalto.`);
     console.log();
@@ -479,6 +479,7 @@ por isso é importante ganhar mais experiência com assaltos menores.`);
 
 function terceiroAssalto(){
     let resultado = 'Livre'
+    tempo.passarTempo(0, 0, 0);
     console.log('3º ASSALTO');
     console.log(`As coisas estão ficando boas, você já está avançando com os assaltos e já tem mais experiência pra
 executar assaltos maiores.`);
@@ -516,7 +517,7 @@ com a arma ${ferramentas[escolhaArma - 1]}.`);
     tempo.passarTempo(0, 3, 30);
     console.log();
     console.log(`Você sabe onde me encontrar quando acabar o assalto! 
-                BOA SORTE!!`);
+                                    BOA SORTE!!`);
     console.log();
     console.log(`Ok. Tudo pronto, bora pro assalto.`);
     console.log();
@@ -639,6 +640,7 @@ por isso é importante ganhar mais experiência com assaltos menores.`);
 
 function quartoAssalto(){
     let resultado = 'Livre'
+    tempo.passarTempo(0, 0, 0);
     console.log('4º ASSALTO');
     console.log(`As coisas estão ficando boas, você já está avançando com os assaltos e já tem mais experiência pra
 executar assaltos maiores.`);
@@ -676,7 +678,7 @@ com a arma ${ferramentas[escolhaArma - 1]}.`);
     tempo.passarTempo(0, 3, 30);
     console.log();
     console.log(`Nós nos encontraremos amanhã no mesmo lugar de sempre! 
-                BOA SORTE!!`);
+                                    BOA SORTE!!`);
     console.log();
     console.log(`Ok. Tudo pronto, bora pro assalto.`);
     console.log();
@@ -796,6 +798,7 @@ Você deu sorte que não estava com nenhuma arma, então conseguiu fugir do banc
 
 function quintoAssalto(){
     let resultado = 'Livre'
+    tempo.passarTempo(0, 0, 0);
     console.log('5º ASSALTO');
     tempo.passarTempo(0, 0, 0);
     console.log(`Vamos ao último assalto, esse decidirá o seu final.`);
@@ -832,7 +835,7 @@ com a arma ${ferramentas[escolhaArma - 1]}.`);
     tempo.passarTempo(0, 3, 30);
     console.log();
     console.log(`Nós nos encontraremos amanhã no mesmo lugar de sempre! 
-                BOA SORTE!!`);
+                                    BOA SORTE!!`);
     console.log();
     console.log(`Ok. Tudo pronto, bora pro assalto.`);
     console.log();
@@ -953,32 +956,32 @@ Você deu sorte que não estava com nenhuma arma, então conseguiu fugir do banc
 
 Jogo_Todo: while(true){
     console.log(`Ok. Já que você escolheu seguir na vida do crime, saiba que não é fácil e é importante 
-    passar algumas informações para você antes de começarmos:
+passar algumas informações para você antes de começarmos:
 
-    Eu vou lhe passar uma lista de opções para assaltar, serão listadas da mais fácil até a mais difícil.
-    Quanto mais difícil, mais experiência você conseguirá, mas você correrá mais risco de ser preso.
-    A experiência aumenta sua chance de sucesso para os próximos assaltos. Você ganhará moral com cada assalto 
-    feito, e assim como a experiência, quanto mais difícil, mais moral. A moral servirá para decidir seu 
-    cargo final, caso consiga fazer todos os assaltos.`);
+Eu vou lhe passar uma lista de opções para assaltar, serão listadas da mais fácil até a mais difícil.
+Quanto mais difícil, mais experiência você conseguirá, mas você correrá mais risco de ser preso.
+A experiência aumenta sua chance de sucesso para os próximos assaltos. Você ganhará moral com cada assalto 
+feito, e assim como a experiência, quanto mais difícil, mais moral. A moral servirá para decidir seu 
+cargo final, caso consiga fazer todos os assaltos.`);
     console.log();
     prompt('Tecle [ENTER] para continuar.');
     console.clear();
     console.log(`Suas chances são as seguintes, será escolhido um número aleatório para você e somado a sua
-    experiência você deve tirar mais que:
-    Uma idosa na rua (5 pontos), concede 10 xp e 2 moral
-    Um mercadinho de bairro (30 pontos), concede 20 xp e 5 moral
-    Uma loja de jóias (60 pontos), concede 30 xp e 10 moral
-    Um banco com pouco movimento (75 pontos), concede 40 xp e 15 moral
-    O banco principal da cidade (96 pontos), concede 50 xp e 30 moral`);
+experiência você deve tirar mais que:
+Uma idosa na rua (5 pontos), concede 10 xp e 2 moral
+Um mercadinho de bairro (30 pontos), concede 20 xp e 5 moral
+Uma loja de jóias (60 pontos), concede 30 xp e 10 moral
+Um banco com pouco movimento (75 pontos), concede 40 xp e 15 moral
+O banco principal da cidade (96 pontos), concede 50 xp e 30 moral`);
     console.log();
     prompt('Tecle [ENTER] para continuar.');
     console.clear();
     console.log(`Use sua lógica para a escolha das armas, não concedem pontos extras, mas algumas não são
-    condizentes com a situação`);
+condizentes com a situação`);
     console.log();
     prompt('Tecle [ENTER] para continuar.');
     console.clear();
-    Assalto1: while(true){
+    Assalto1: for (let i = 0; i < 6; i++){
         resultado = primeiroAssalto();
         console.log();
         prompt('Tecle [ENTER] para continuar.');
@@ -989,8 +992,10 @@ Jogo_Todo: while(true){
             console.log(`Agora vamos contar todo o dinheiro para saber quanto você tem no total.`);
             console.log(`Você tem agora ${personagem.saldo} reais`);
             tempo.passarTempo(0, 2, 50);
-            console.log(`Está na hora de dormir, amanhã tem que se encontrar com Javier bem cedo.`);
-            tempo.passarTempo(0, 12, 10);
+            console.log(`Agora deve se alimentar e esconder as provas do crime para que ninguém suspeite.`);
+            tempo.passarTempo(0, 2, 10);
+            console.log(`Está na hora de dormir, amanhã deverá se encontrar com Javier bem cedo.`);
+            tempo.passarTempo(0, 9, 30);
             console.log(`Encontrando Javier no esconderijo dia seguinte, ele questiona:
 Você deseja continuar para o próximo assalto?
 [1] Sim
@@ -1001,13 +1006,20 @@ Você deseja continuar para o próximo assalto?
                 continuar = +prompt();
             }
             if (continuar == 2){
-                console.log('É uma pena você já desistir agora, você poderia ganhar muito dinheiro.')
+                console.log('É uma pena você já desistir agora, você poderia ganhar muito dinheiro.');
                 break Jogo_Todo;
             } else {
                 break Assalto1;
             }
         } else {
             console.log('Você foi preso.');
+            console.log('Você possui', chances, 'chances.');
+            if (chances == 0){
+                console.log(`################################# 
+            GAME OVER 
+#################################`);
+                break Jogo_Todo;
+            }
             console.log(`Deseja tentar novamente?
 [1] Sim
 [2] Não`);
@@ -1017,13 +1029,17 @@ Você deseja continuar para o próximo assalto?
             continuar = +prompt();
             }
             if (continuar == 1){
+                tempo.passarTempo(0, -3, -30);
+                console.clear();
+                console.log('Voltando para o início do dia...');
+                chances-= 1
                 continue Assalto1;
             } else {
                 break Jogo_Todo;
             }
         }
     }
-    Assalto2: while(true){
+    Assalto2: for (let i = 0; i < 6; i++){
         resultado = segundoAssalto();
         console.log();
         prompt('Tecle [ENTER] para continuar.');
@@ -1034,8 +1050,10 @@ Você deseja continuar para o próximo assalto?
             console.log(`Agora vamos contar todo o dinheiro para saber quanto você tem no total.`);
             console.log(`Você tem agora ${personagem.saldo} reais`);
             tempo.passarTempo(0, 2, 50);
-            console.log(`Está na hora de dormir, amanhã tem que se encontrar com Javier bem cedo.`);
-            tempo.passarTempo(0, 12, 10);
+            console.log(`Agora deve se alimentar e esconder as provas do crime para que ninguém suspeite.`);
+            tempo.passarTempo(0, 2, 10);
+            console.log(`Está na hora de dormir, amanhã deverá se encontrar com Javier bem cedo.`);
+            tempo.passarTempo(0, 9, 30);
             console.log(`Encontrando Javier no esconderijo dia seguinte, ele questiona:
 Você deseja continuar para o próximo assalto?
 [1] Sim
@@ -1047,13 +1065,20 @@ Você deseja continuar para o próximo assalto?
             }
             if (continuar == 2){
                 console.log(`Você conseguiu um dinheiro extra, mas acha que isso já é o suficiente pra
-viver o resto de sua vida?! Bom, você fez sua escolha, então, boa sorte!`)
+viver o resto de sua vida?! Bom, você fez sua escolha, então, boa sorte!`);
                 break Jogo_Todo;
             } else {
                 break Assalto2;
             }
         } else {
             console.log('Você foi preso.');
+            console.log('Você possui', chances, 'chances.');
+            if (chances == 0){
+                console.log(`################################# 
+            GAME OVER 
+#################################`);
+                break Jogo_Todo;
+            }
             console.log(`Deseja tentar novamente?
 [1] Sim
 [2] Não`);
@@ -1063,13 +1088,17 @@ viver o resto de sua vida?! Bom, você fez sua escolha, então, boa sorte!`)
             continuar = +prompt();
             }
             if (continuar == 1){
+                tempo.passarTempo(0, -3, -30);
+                console.clear();
+                console.log('Voltando para o início do dia...');
+                chances-= 1
                 continue Assalto2;
             } else {
                 break Jogo_Todo;
             }
         }
     }
-    Assalto3: while(true){    
+    Assalto3: for (let i = 0; i < 6; i++){    
         resultado = terceiroAssalto();
         console.log();
         prompt('Tecle [ENTER] para continuar.');
@@ -1080,8 +1109,10 @@ viver o resto de sua vida?! Bom, você fez sua escolha, então, boa sorte!`)
             console.log(`Agora vamos contar todo o dinheiro para saber quanto você tem no total.`);
             console.log(`Você tem agora ${personagem.saldo} reais`);
             tempo.passarTempo(0, 2, 50);
-            console.log(`Está na hora de dormir, amanhã tem que se encontrar com Javier bem cedo.`);
-            tempo.passarTempo(0, 12, 10);
+            console.log(`Agora deve se alimentar e esconder as provas do crime para que ninguém suspeite.`);
+            tempo.passarTempo(0, 2, 10);
+            console.log(`Está na hora de dormir, amanhã deverá se encontrar com Javier bem cedo.`);
+            tempo.passarTempo(0, 9, 30);
             console.log(`Encontrando Javier no esconderijo dia seguinte, ele questiona:
 Você deseja continuar para o próximo assalto?
 [1] Sim
@@ -1100,6 +1131,13 @@ gerado uma boa quantia de dinheiro para sua vida.`);
             }
         } else {
             console.log('Você foi preso.');
+            console.log('Você possui', chances, 'chances.');
+            if (chances == 0){
+                console.log(`################################# 
+            GAME OVER 
+#################################`);
+                break Jogo_Todo;
+            }
             console.log(`Deseja tentar novamente?
 [1] Sim
 [2] Não`);
@@ -1109,13 +1147,17 @@ gerado uma boa quantia de dinheiro para sua vida.`);
             continuar = +prompt();
             }
             if (continuar == 1){
+                tempo.passarTempo(0, -3, -30);
+                console.clear();
+                console.log('Voltando para o início do dia...');
+                chances-= 1
                 continue Assalto3;
             } else {
                 break Jogo_Todo;
             }
         }
     }
-    Assalto4: while(true){
+    Assalto4: for (let i = 0; i < 6; i++){
         resultado = quartoAssalto();
         console.log();
         prompt('Tecle [ENTER] para continuar.');
@@ -1126,8 +1168,10 @@ gerado uma boa quantia de dinheiro para sua vida.`);
             console.log(`Agora vamos contar todo o dinheiro para saber quanto você tem no total.`);
             console.log(`Você tem agora ${personagem.saldo} reais`);
             tempo.passarTempo(0, 2, 50);
-            console.log(`Está na hora de dormir, amanhã tem que se encontrar com Javier bem cedo.`);
-            tempo.passarTempo(0, 12, 10);
+            console.log(`Agora deve se alimentar e esconder as provas do crime para que ninguém suspeite.`);
+            tempo.passarTempo(0, 2, 10);
+            console.log(`Está na hora de dormir, amanhã deverá se encontrar com Javier bem cedo.`);
+            tempo.passarTempo(0, 9, 30);
             console.log(`Encontrando Javier no esconderijo dia seguinte, ele questiona:
 Você deseja continuar para o próximo assalto?
 [1] Sim
@@ -1145,6 +1189,13 @@ Você deseja continuar para o próximo assalto?
             }
         } else {
             console.log('Você foi preso.');
+            console.log('Você possui', chances, 'chances.');
+            if (chances == 0){
+                console.log(`################################# 
+            GAME OVER 
+#################################`);
+                break Jogo_Todo;
+            }
             console.log(`Deseja tentar novamente?
 [1] Sim
 [2] Não`);
@@ -1154,13 +1205,17 @@ Você deseja continuar para o próximo assalto?
             continuar = +prompt();
             }
             if (continuar == 1){
+                tempo.passarTempo(0, -3, -30);
+                console.clear();
+                console.log('Voltando para o início do dia...');
+                chances-= 1
                 continue Assalto4;
             } else {
                 break Jogo_Todo;
             }
         }
     }
-    Assalto5: while(true){
+    Assalto5: for (let i = 0; i < 6; i++){
         resultado = quintoAssalto();
         console.log();
         prompt('Tecle [ENTER] para continuar.');
@@ -1171,8 +1226,10 @@ Você deseja continuar para o próximo assalto?
             console.log(`Agora vamos contar todo o dinheiro para saber quanto você tem no total.`);
             console.log(`Você tem agora ${personagem.saldo} reais`);
             tempo.passarTempo(0, 2, 50);
-            console.log(`Está na hora de dormir, amanhã tem que se encontrar com Javier bem cedo.`);
-            tempo.passarTempo(0, 12, 10);
+            console.log(`Agora deve se alimentar e esconder as provas do crime para que ninguém suspeite.`);
+            tempo.passarTempo(0, 2, 10);
+            console.log(`Está na hora de dormir, amanhã deverá se encontrar com Javier bem cedo.`);
+            tempo.passarTempo(0, 9, 30);
             console.log(`Encontrando Javier no esconderijo dia seguinte, ele questiona:
 Você deseja continuar para o último assalto?
 [1] Sim
@@ -1190,6 +1247,13 @@ Você deseja continuar para o último assalto?
             }
         } else {
             console.log('Você foi preso.');
+            console.log('Você possui', chances, 'chances.');
+            if (chances == 0){
+                console.log(`################################# 
+            GAME OVER 
+#################################`);
+                break Jogo_Todo;
+            }
             console.log(`Deseja tentar novamente?
 [1] Sim
 [2] Não`);
@@ -1199,6 +1263,10 @@ Você deseja continuar para o último assalto?
             continuar = +prompt();
             }
             if (continuar == 1){
+                tempo.passarTempo(0, -3, -30);
+                console.clear();
+                console.log('Voltando para o início do dia...');
+                chances-= 1
                 continue Assalto5;
             } else {
                 break Jogo_Todo;
@@ -1218,9 +1286,9 @@ outros assaltos pela cidade. Já te ensinei tudo o que precisa saber.`);
     console.log(`Javier: Gostei muito de você, venha trabalhar comigo como meu braço direito!`);
 } else if (personagem.moral >= 30 && personagem.moral <= 44){
     console.log(`Sua moral com Javier é de ${personagem.moral}`);
-    console.log(`Javier: Até que você não é ruim, `);
+    console.log(`Javier: Até que você não é ruim, você pode ficar na equipe que realiza pequenos assaltos.`);
 } else {
-    console.log(`Javier: Você é muito medroso, não tem perfil para permanecer na nossa equipe`);
+    console.log(`Javier: Você é péssimo, não tem perfil para permanecer na nossa equipe!`);
 }
 
 
